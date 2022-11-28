@@ -24,7 +24,7 @@
             </ul>
         </div>
     </section>
-    <section id="pro-details" class="section-p1">
+    <section id="prodetails" class="section-p1">
         <div class="single-pro-image">
             <img src="img/products/f1.jpg" width="100%" id="MainImg" alt="">
             <div class="small-img-group">
@@ -32,14 +32,110 @@
                     <img src="img/products/f1.jpg" width="100%" class="small-img" alt="">
                 </div>
                 <div class="small-img-col">
-                    <img src="img/products/f1.jpg" width="100%" class="small-img" alt="">
+                    <img src="img/products/f1.2.jpg" width="100%" class="small-img" alt="">
                 </div>
                 <div class="small-img-col">
-                    <img src="img/products/f1.jpg" width="100%" class="small-img" alt="">
+                    <img src="img/products/f1.3.jpg" width="100%" class="small-img" alt="">
+                </div>
+                <div class="small-img-col">
+                    <img src="img/products/f1.4.jpg" width="100%" class="small-img" alt="">
                 </div>
             </div>
-            <div class="small-img-col">
-                <img src="img/products/f1.jpg" width="100%" class="small-img" alt="">
+        </div>
+        <div class="single-pro-details">
+            <h6>Accueil>Pull</h6>
+            <h4>Dior Pull manche longue motifs</h4>
+            <h2>400€</h2>
+            <select>
+                <option>Taille</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+            <input type="number" value="1">
+            <button class="normal">Ajouter Au Panier</button>
+            <h4>Description</h4>
+            <span>Le pull en maille revisite l'emblématique motif Dior Oblique de la Maison. Confectionné en jacquard de
+                laine bleu marine, il présente une silhouette classique complétée d'un col rond, d'un bas et de poignets
+                côtelés.</span>
+        </div>
+    </section>
+    <section id="produit1" class="section-p1">
+        <h2>Recommandations</h2>
+        <p>Collection Hiver/Printemps</p>
+        <div class="pro-container">
+            <div class="pro">
+                <img src="img/products/n1.jpg" alt="">
+                <div class="description">
+                    <span>Uniqlo</span>
+                    <h5>T-shirt SPY X FAMILY</h5>
+                    <div class="note">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>25€</h4>
+                </div>
+                <a href="#">
+                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+                </a>
+            </div>
+            <div class="pro">
+                <img src="img/products/n2.jpg" alt="">
+                <div class="description">
+                    <span>Lacoste</span>
+                    <h5>Pull relaxed fit motif tartan en laine mélangée</h5>
+                    <div class="note">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>100€</h4>
+                </div>
+                <a href="#">
+                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+                </a>
+            </div>
+            <div class="pro">
+                <img src="img/products/n3.jpg" alt="">
+                <div class="description">
+                    <span>Sandro</span>
+                    <h5>Hoodie broderie</h5>
+                    <div class="note">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>120€</h4>
+                </div>
+                <a href="#">
+                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+                </a>
+            </div>
+            <div class="pro">
+                <img src="img/products/n4.jpg" alt="">
+                <div class="description">
+                    <span>Ralph Lauren</span>
+                    <h5>Pull golden retriever en cachemire</h5>
+                    <div class="note">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>170€</h4>
+                </div>
+                <a href="#" id="test">
+                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+                </a>
             </div>
         </div>
     </section>
@@ -100,6 +196,22 @@
             <p>©Projet Web dynamique 2022 - OMNES Marketplace Groupe 971</p>
         </div>
     </footer>
+    <script>
+        var MainImg = document.getElementById("MainImg");
+        var smallimg= document.getElementsByClassName("small-img");
+        smallimg[0].onclick = function(){
+            MainImg.src = smallimg[0].src;
+        }
+        smallimg[1].onclick = function(){
+            MainImg.src = smallimg[1].src;
+        }
+        smallimg[2].onclick = function(){
+            MainImg.src = smallimg[2].src;
+        }
+        smallimg[3].onclick = function(){
+            MainImg.src = smallimg[3].src;
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 
