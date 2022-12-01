@@ -669,3 +669,45 @@ footer .copyright {
 #about-head div {
     padding-left: 40px;
 }
+
+#about-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#about-details .details{
+    width: 40%;
+}
+
+#about-details .details span{
+    font-size: 12px;
+}
+
+#about-details .details h2{
+    font-size: 26px;
+    line-height: 35px;
+    padding: 20px 0;
+}
+
+#about-details .details h3{
+    font-size: 16px;
+    padding-bottom: 15px;
+}
+
+#about-details .details li{
+    list-style: none;
+    display: flex;
+    padding: 10px 0;
+}
+
+#about-details .details li i{
+    font-size: 14px;
+    padding-right: 22px;
+
+}
+
+#about-details .details li p{
+    margin: 0;
+    font-size: 14px;
+}
