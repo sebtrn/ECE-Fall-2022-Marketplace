@@ -724,6 +724,7 @@ footer .copyright {
     padding: 20px 0;
     margin: auto;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .form-container span {
@@ -745,6 +746,8 @@ footer .copyright {
     padding: 0 20px;
     position: absolute;
     top: 130px;
+    transition: transform 1s;
+    
 }
 
 form input {
@@ -780,4 +783,5 @@ form .btn:focus{
     height: 3px;
     margin-top: 8px;
     transform: translateX(100px);
+    transition: transform 1s;
 }
