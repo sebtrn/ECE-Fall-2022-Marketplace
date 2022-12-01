@@ -25,11 +25,25 @@
         </div>
     </section>
 
-<section id="form-compte">
-    <div class="form-box">
-    <form action="">
-        <span></span>
-    </form>
+<section id="form-compte" class="section-p1">
+    <div class="form-container">
+        <div class="form-btn">
+            <span onclick="login()">Login</span>
+            <span onclick="register()">Register</span>
+            <hr id="Indicator">
+        </div>
+        <form id="LoginForm">
+            <input type="text" placeholder="identifiant">
+            <input type="password" placeholder="mot de passe">
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <form id="RegForm">
+            <input type="text" placeholder="identifiant">
+            <input type="email" placeholder="email">
+            <input type="password" placeholder="mot de passe">
+            <button type="submit" class="btn">Register</button>
+        </form>
     </div>
 </section>
 
@@ -80,6 +94,7 @@
             <p>©Projet Web dynamique 2022 - OMNES Marketplace Groupe 971</p>
         </div>
     </footer>
+
 
     <script src="script.js"></script>
 </body>
