@@ -1,3 +1,17 @@
+<?php
+
+$host = 'localhost';
+$dbname = 'marketplace';
+$user = 'root';
+$pass = '';
+
+$db = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $pass,
+array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+
+// pour login :
+// $_SESSION
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,11 +63,24 @@
         <h2>Best-sellers</h2>
         <p>Collection Hiver - Printemps</p>
         <div class="pro-container">
+
+        <?php
+
+        // exemple
+        $sql = 'SELECT * FROM article a';
+        $req = $db->prepare($sql);
+        $req->execute();
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+
+        foreach($result as $row)
+        {
+            ?>
             <div class="pro">
-                <img src="img/products/f1.jpg" alt="">
+                <img src="<?php echo $row['Img']; ?>" alt="">
                 <div class="description">
                     <span>Dior</span>
-                    <h5>Pull manche longue motifs</h5>
+                    <h5> <?php echo $row['NomArticle']; ?> </h5>
                     <div class="note">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -61,12 +88,16 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>400€</h4>
+                    <h4><?php echo $row['Prix']; ?> </h4>
                 </div>
-                <a href="#">
+                <a href="produit.html?IdArticle=<?php echo $row['IdArticle']; ?>">
                     <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
                 </a>
             </div>
+            <?php
+        }
+        ?>
+            
             <div class="pro">
                 <img src="img/products/f2.jpg" alt="">
                 <div class="description">
