@@ -1,16 +1,5 @@
-<?php
-
-$host = 'localhost';
-$dbname = 'marketplace';
-$user = 'root';
-$pass = '';
-
-$db = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $pass,
-array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-
-// pour login :
-// $_SESSION
-?>
+<?php include 'conn.php';
+session_start();?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,12 +18,12 @@ array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         <a href="#"><img src="img/logo.png" alt="" width="172px" height="70px"></a>
         <div>
             <ul id="navbar">
-                <li><a class="active" href="index.html">Accueil</a></li>
-                <li><a href="shop.html">Boutique</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="notification.html">Notification</a></li>
-                <li><a href="compte.html">Mon compte</a></li>
-                <li><a href="panier.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a class="active" href="index.php">Accueil</a></li>
+                <li><a href="shop.php">Boutique</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="notification.php">Notification</a></li>
+                <li><a href="compte.php">Mon compte</a></li>
+                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
             </ul>
         </div>
     </section>
@@ -66,12 +55,11 @@ array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 
         <?php
 
-        // exemple
+        // Lister tous les articles
         $sql = 'SELECT * FROM article a';
         $req = $db->prepare($sql);
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
-
 
         foreach($result as $row)
         {
@@ -90,7 +78,7 @@ array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
                     </div>
                     <h4><?php echo $row['Prix']; ?>€ </h4>
                 </div>
-                <a href="produit.html?IdArticle=<?php echo $row['IdArticle']; ?>">
+                <a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>">
                     <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
                 </a>
             </div>

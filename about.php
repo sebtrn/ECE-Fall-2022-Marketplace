@@ -15,12 +15,12 @@
         <a href="#"><img src="img/logo.png" alt="" width="172px" height="70px"></a>
         <div>
             <ul id="navbar">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="shop.html">Boutique</a></li>
-                <li><a class="active" href="about.html">About</a></li>
-                <li><a href="notification.html">Notification</a></li>
-                <li><a href="compte.html">Mon compte</a></li>
-                <li><a href="panier.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="shop.php">Boutique</a></li>
+                <li><a class="active" href="about.php">About</a></li>
+                <li><a href="notification.php">Notification</a></li>
+                <li><a href="compte.php">Mon compte</a></li>
+                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
             </ul>
         </div>
     </section>
