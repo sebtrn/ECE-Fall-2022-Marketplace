@@ -79,7 +79,7 @@ array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
             <div class="pro">
                 <img src="<?php echo $row['Img']; ?>" alt="">
                 <div class="description">
-                    <span>Dior</span>
+                    <span><?php echo $row['Marque']; ?></span>
                     <h5> <?php echo $row['NomArticle']; ?> </h5>
                     <div class="note">
                         <i class="fas fa-star"></i>
@@ -88,7 +88,7 @@ array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4><?php echo $row['Prix']; ?> </h4>
+                    <h4><?php echo $row['Prix']; ?>€ </h4>
                 </div>
                 <a href="produit.html?IdArticle=<?php echo $row['IdArticle']; ?>">
                     <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
@@ -97,134 +97,6 @@ array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
             <?php
         }
         ?>
-            
-            <div class="pro">
-                <img src="img/products/f2.jpg" alt="">
-                <div class="description">
-                    <span>Ralph Lauren</span>
-                    <h5>Pull Ralph Lauren Crème</h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>80€</h4>
-                </div>
-                <a href="#">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
-            <div class="pro">
-                <img src="img/products/f3.jpg" alt="">
-                <div class="description">
-                    <span>Sandro</span>
-                    <h5>Sweatshirt brodé motifs tulipes</h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>90€</h4>
-                </div>
-                <a href="#">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
-            <div class="pro">
-                <img src="img/products/f4.jpg" alt="">
-                <div class="description">
-                    <span>Lacoste</span>
-                    <h5>Polo classique L.12.12 uni</h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>70€</h4>
-                </div>
-                <a href="#" id="test">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
-            <div class="pro">
-                <img src="img/products/f5.jpg" alt="">
-                <div class="description">
-                    <span>Uniqlo</span>
-                    <h5>Pantalon habillé confort strech</h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>20€</h4>
-                </div>
-                <a href="#">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
-            <div class="pro">
-                <img src="img/products/f6.jpg" alt="">
-                <div class="description">
-                    <span>Uniqlo</span>
-                    <h5>T-shirt SPY X FAMILY</h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>20€</h4>
-                </div>
-                <a href="#">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
-            <div class="pro">
-                <img src="img/products/f7.jpg" alt="">
-                <div class="description">
-                    <span>Nike</span>
-                    <h5>BLAZER MID '77 VNTG</h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>65€</h4>
-                </div>
-                <a href="#">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
-            <div class="pro">
-                <img src="img/products/f8.jpg" alt="">
-                <div class="description">
-                    <span>Converse</span>
-                    <h5>Chuck Taylor All Star</h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>65€</h4>
-                </div>
-                <a href="#">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
-        </div>
     </section>
     <section id="banner" class="section-m1">
         <h2>Black Friday</h2>
