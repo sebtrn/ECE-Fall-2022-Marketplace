@@ -1,6 +1,16 @@
-<?php  
-include 'conn.php'
+<?php
+include 'conn.php';
 // header
+session_start();
+
+if(isset($_GET['IdPanier'])){
+    header('Location: panier.php');
+    $sql = 'DELETE FROM panier WHERE IdPanier = :IdPanier';
+    $req = $db->prepare($sql);
+    $req->execute(array(
+        ':IdPanier' => intval($_GET["IdPanier"])
+    ));
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +45,8 @@ include 'conn.php'
         <p>Votre panier</p>
     </section>
 
+
+
     <section id="panier" class="section-p1">
         <table width="100%">
             <thead>
@@ -44,33 +56,31 @@ include 'conn.php'
                     <td>Produit</td>
                     <td>Prix</td>
                     <td>Quantite</td>
-                    <td>Total</td>
                 </tr>
             <tbody>
-                <tr>
-                    <td><a href="#"></a><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-                    <td><img src="img/products/f1.jpg" alt=""></td>
-                    <td>Pull Dior</td>
-                    <td>300€</td>
-                    <td><input type="number" value="1"></td>
-                    <td>300€</td>
-                </tr>
-                <tr>
-                    <td><a href="#"></a><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-                    <td><img src="img/products/f2.jpg" alt=""></td>
-                    <td>Pull Dior</td>
-                    <td>300€</td>
-                    <td><input type="number" value="1"></td>
-                    <td>300€</td>
-                </tr>
-                <tr>
-                    <td><a href="#"></a><i class="fa-sharp fa-solid fa-trash"></i></a></td>
-                    <td><img src="img/products/f3.jpg" alt=""></td>
-                    <td>Pull Dior</td>
-                    <td>300€</td>
-                    <td><input type="number" value="1"></td>
-                    <td>300€</td>
-                </tr>
+
+                <?php
+
+                $sql = 'SELECT * FROM panier p LEFT join article a ON p.IdArticle = a.IdArticle WHERE p.IdUtilisateur = :IdUtilisateur';
+                $req = $db->prepare($sql);
+                $req->execute(array(
+                    ':IdUtilisateur' => intval($_SESSION["IdUtilisateur"]),
+                ));
+                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+                
+
+                foreach($result as $row) {
+                ?>
+                    <tr>
+                        <td><a href="panier.php?IdPanier=<?php echo $row['IdPanier']?>"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                        <td><a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>"><img src="<?php echo $row['Img']; ?>" alt=""></a></td>
+                        <td><?php echo $row['NomArticle']; ?></td>
+                        <td><?php echo $row['Prix']; ?>€</td>
+                        <td><?php echo $row['Quantite']; ?></td>
+                    </tr>
+                <?php
+                } ?>
             </tbody>
             </thead>
         </table>
@@ -83,12 +93,22 @@ include 'conn.php'
                 <button class="normal">Appliquer</button>
             </div>
         </div>
+        <?php $sql = 'SELECT SUM(a.Prix*p.Quantite) AS PrixTotal FROM panier p LEFT join article a ON p.IdArticle = a.IdArticle WHERE p.IdUtilisateur = :IdUtilisateur';
+                $req = $db->prepare($sql);
+                $req->execute(array(
+                    ':IdUtilisateur' => intval($_SESSION["IdUtilisateur"]),
+                ));
+                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+                ?>
         <div id="subtotal">
+        
             <h3>Total</h3>
             <table>
                 <tr>
                     <td>Total</td>
-                    <td>300€</td>
+
+                    <td><?php echo $result[0]['PrixTotal']; ?>€</td>
                 </tr>
                 <tr>
                     <td>Livraison</td>
@@ -96,11 +116,13 @@ include 'conn.php'
                 </tr>
                 <tr>
                     <td><strong>Total commande</strong></td>
-                    <td><strong>300€</strong></td>
+                    <td><strong><?php echo $result[0]['PrixTotal']; ?>€</strong></td>
                 </tr>
             </table>
             <button class="normal">Paiement</button>
+            
         </div>
+        
     </section>
 
 

@@ -36,7 +36,7 @@
     <?php
 
 // Lister tous les articles
-$sql = 'SELECT * FROM article a';
+$sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0';
 $req = $db->prepare($sql);
 $req->execute();
 $result = $req->fetchAll(PDO::FETCH_ASSOC);

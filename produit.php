@@ -1,12 +1,21 @@
 <?php
 include 'conn.php';
-// if(isset($_POST['addArticle'])){
-//     if(isset($_SESSION['IdUtilisateur'])){
-//         var_dump('prix');
-//     } else {
-//         header('Location: compte.php');
-//     }
-// }
+session_start();
+$bArticleAdded = false;
+if (isset($_POST['addArticle'])) {
+    if (isset($_SESSION['IdUtilisateur'])) {
+        $sql = 'INSERT INTO panier SET IdArticle = :IdArticle, IdUtilisateur = :IdUtilisateur, Quantite = :Quantite';
+        $req = $db->prepare($sql);
+        $req->execute(array(
+            ':IdArticle' => intval($_GET["IdArticle"]),
+            ':IdUtilisateur' => intval($_SESSION["IdUtilisateur"]),
+            ':Quantite' => intval($_POST['Quantite'])
+        ));
+        $bArticleAdded = true;
+    } else {
+        header('Location: compte.php');
+    }
+}
 
 // var_dump($_SESSION['IdUtilisateur']);
 $sql = 'SELECT * FROM article a WHERE a.IdArticle = :IdArticle';
@@ -61,9 +70,12 @@ $result = $result[0];
                 <option>L</option>
                 <option>XL</option>
             </select>
-            <input type="number" value="1" maxlength="5">
             <form action="" method="post">
-               <button type="submit" name="addArticle" class="normal">Ajouter Au Panier</button>
+                <input type="number" name="Quantite" value="1" min="1" max="<?php echo $result['QuantiteMax']; ?>">
+                <button type="submit" name="addArticle" class="normal">Ajouter Au Panier</button>
+                <?php if ($bArticleAdded) {
+                    echo "Article ajouté au panier";
+                }?>
             </form>
             <h4>Description</h4>
             <span><?php echo $result['Description']; ?></span>

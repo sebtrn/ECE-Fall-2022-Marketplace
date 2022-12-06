@@ -71,11 +71,9 @@
     </section>
 
     <?php
-    //     
+    //Register
     if (isset($_POST['btn-register'])) {
         if ($_POST["email"] != '' && $_POST["identifiant"] != '' && $_POST["password"] != '' && $_POST["Nom"] != '' && $_POST["Prenom"] != '' && $_POST["Adresse"] != '' && $_POST["Ville"] != '' && $_POST["Pays"] != '' && $_POST["CodePostal"] != '' && $_POST["Telephone"] != '' && $_POST["TypeRole"] != '') {
-            // $sql = 'INSERT INTO utilisateur (`Pseudo`, `Email`, `Password`, `Prenom`, `Nom`, `Adresse`, `Ville`, `Pays`, `CodePostal`, `Telephone`, `IdTypeRole`) VALUES (:identifiant, :email, `:password`, :Prenom, :Nom, :Adresse, :Ville, :Pays,:CodePostal, :Telephone, :TypeRole)';
-
             $sql = 'INSERT INTO utilisateur SET Pseudo = :Pseudo, Email = :Email, Password = :Password, Prenom = :Prenom, Nom = :Nom, Adresse = :Adresse, Ville = :Ville, Pays = :Pays, CodePostal = :CodePostal, Telephone = :Telephone, IdTypeRole = :IdTypeRole';
 
             $req = $db->prepare($sql);
@@ -100,7 +98,7 @@
             echo "<script>alert(\"Un champ est vide\")</script>";
         }
     }
-
+    //Login
     if (isset($_POST['btn-login'])) {
         if ($_POST["identifiant"] != '' && $_POST["password"] != '') {
             //commencer le query
@@ -120,7 +118,7 @@
         }
     }
     ?>
-
+    <!-- front login ici -->
     <footer class="section-p1">
         <div class="col">
             <img class="logo" src="logo_blanc.png" alt="">
