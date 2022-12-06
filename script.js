@@ -19,3 +19,4 @@ function login() {
     LoginForm.style.transform = "translateX(300px)";
     Indicator.style.transform = "translateX(0px)";
 }
+

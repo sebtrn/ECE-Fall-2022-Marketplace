@@ -15,41 +15,28 @@
         <a href="#"><img src="img/logo.png" alt="" width="172px" height="70px"></a>
         <div>
             <ul id="navbar">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="shop.html">Boutique</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="notification.html">Notification</a></li>
-                <li><a class="active" href="compte.html">Mon compte</a></li>
-                <li><a href="panier.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a  href="index.php">Accueil</a></li>
+                <li><a href="shop.php">Boutique</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a class="active" href="notification.php">Notification</a></li>
+                <li><a href="compte.php">Mon compte</a></li>
+                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
             </ul>
         </div>
     </section>
-
-    <section id="form-compte" class="section-p1">
-        <div class="form-container">
-            <div class="form-btn">
-                <span onclick="login()">Login</span>
-                <span onclick="register()">Register</span>
-                <hr id="Indicator">
-            </div>
-            <form id="LoginForm">
-                <input type="text" placeholder="identifiant">
-                <input type="password" placeholder="mot de passe">
-                <button type="submit" class="btn">Login</button>
-            </form>
-
-            <form id="RegForm">
-                <input type="text" placeholder="identifiant">
-                <input type="email" placeholder="email">
-                <input type="password" placeholder="mot de passe">
-                <button type="submit" class="btn">Register</button>
-            </form>
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>S'inscrire à la newsletter</h4>
+            <p>Recevez toutes les <span>offres exclusives.</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="Votre email">
+            <button class="normal">S'inscrire</button>
         </div>
     </section>
-
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" src="logo_blanc.png" alt="">
+            <img class="logo"src="logo_blanc.png" alt="">
             <h4>Contact</h4>
             <p><strong>Adresse:</strong> Rue Sextius Michel, 75015 Paris</p>
             <p><strong>Téléphone:</strong>01 44 39 06 00</p>
@@ -94,8 +81,6 @@
             <p>©Projet Web dynamique 2022 - OMNES Marketplace Groupe 971</p>
         </div>
     </footer>
-
-
     <script src="script.js"></script>
 </body>
 

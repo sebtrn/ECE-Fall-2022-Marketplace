@@ -718,13 +718,14 @@ footer .copyright {
 .form-container {
     background: #fff;
     width: 300px;
-    height: 400px;
+    height: 740px;
     position: relative;
     text-align: center;
     padding: 20px 0;
     margin: auto;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    
 }
 
 .form-container span {
@@ -751,6 +752,14 @@ footer .copyright {
 }
 
 form input {
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+}
+
+form select {
     width: 100%;
     height: 30px;
     margin: 10px 0;
@@ -894,6 +903,9 @@ form .btn:focus{
     font-size: 13px;
 }
 
+#panier  a{
+    color: #000;
+}
 
 
 
