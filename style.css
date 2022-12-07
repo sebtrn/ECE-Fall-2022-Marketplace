@@ -795,6 +795,10 @@ form .btn:focus{
     transition: transform 1s;
 }
 
+.delete-disable{
+    color: rgb(167, 167, 167);
+}
+
 /* Panier */
 
 #panier table{
@@ -906,6 +910,40 @@ form .btn:focus{
 #panier  a{
     color: #000;
 }
+
+/* Login Page */
+
+#Page-Login .Login-Container{
+    background: #fff;
+    width: 1400px;
+    height: 1400px;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+#Page-Login .Login-Container h2{
+    padding-top: 40px;
+    font-size: 30px;
+}
+
+ #Page-Login .Login-Container table{
+    padding-top: 50px;
+    padding-left: 20px;
+    justify-content: center;
+ }
+
+ #Page-Login .Login-Container h3{
+    padding: 40px 40px;
+ }
+
+ #Page-Login .Login-Container .Champ-User{
+    justify-content: left;
+    text-align: left;
+ }
+
 
 
 

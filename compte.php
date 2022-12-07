@@ -1,4 +1,67 @@
-<?php include 'conn.php' ?>
+<?php
+include 'conn.php';
+session_start();
+//Register
+if (isset($_POST['btn-register'])) {
+    if ($_POST["email"] != '' && $_POST["identifiant"] != '' && $_POST["password"] != '' && $_POST["Nom"] != '' && $_POST["Prenom"] != '' && $_POST["Adresse"] != '' && $_POST["Ville"] != '' && $_POST["Pays"] != '' && $_POST["CodePostal"] != '' && $_POST["Telephone"] != '' && $_POST["TypeRole"] != '') {
+        $sql = 'INSERT INTO utilisateur SET Pseudo = :Pseudo, Email = :Email, Password = :Password, Prenom = :Prenom, Nom = :Nom, Adresse = :Adresse, Ville = :Ville, Pays = :Pays, CodePostal = :CodePostal, Telephone = :Telephone, IdTypeRole = :IdTypeRole';
+        $req = $db->prepare($sql);
+        $req->execute(array(
+            ':Pseudo' => ($_POST["identifiant"]),
+            ':Email' => ($_POST["email"]),
+            ':Password' => ($_POST["password"]),
+            ':Prenom' => ($_POST["Prenom"]),
+            ':Nom' => ($_POST["Nom"]),
+            ':Adresse' => ($_POST["Adresse"]),
+            ':Ville' => ($_POST["Ville"]),
+            ':Pays' => ($_POST["Pays"]),
+            ':CodePostal' => (intval($_POST["CodePostal"])),
+            ':Telephone' => (intval($_POST["Telephone"])),
+            ':IdTypeRole' => (intval($_POST["TypeRole"]))
+        ));
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        $_SESSION['IdUtilisateur'] = $db->lastInsertId();
+        $_SESSION['Pseudo'] = $_POST["identifiant"];
+        $_SESSION['IdTypeRole'] = intval($_POST["TypeRole"]);
+    } else {
+        echo "<script>alert(\"Un champ est vide\")</script>";
+    }
+}
+//Login
+if (isset($_POST['btn-login'])) {
+    if ($_POST["identifiant"] != '' && $_POST["password"] != '') {
+        //commencer le query
+        $sql = "SELECT * FROM utilisateur u WHERE u.Pseudo = :Pseudo AND u.Password = :Password";
+        $req = $db->prepare($sql);
+        $req->execute(array(
+            ':Pseudo' => ($_POST["identifiant"]),
+            ':Password' => ($_POST["password"])
+        ));
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        if (count($result) > 0) {
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['IdUtilisateur'] = $result[0]['IdUtilisateur'];
+            $_SESSION['Pseudo'] = $result[0]['Pseudo'];
+            $_SESSION['IdTypeRole'] = $result[0]['IdTypeRole'];
+        }
+    }
+}
+
+
+// Delete User 
+if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] == 1) {
+    header('Location: compte.php');
+    $sql = 'DELETE FROM utilisateur WHERE IdUtilisateur = :IdUtilisateur';
+    $req = $db->prepare($sql);
+    $req->execute(array(
+        ':IdUtilisateur' => intval($_GET["IdUtilisateur"])
+    ));
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,103 +85,199 @@
                 <li><a href="about.php">About</a></li>
                 <li><a href="notification.php">Notification</a></li>
                 <li><a class="active" href="compte.php">Mon compte</a></li>
-                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
+                    <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                <?php } ?>
             </ul>
         </div>
     </section>
+    <?php if (!isset($_SESSION['IdUtilisateur'])) { ?>
+        <section id="form-compte" class="section-p1">
+            <div class="form-container">
+                <div class="form-btn">
+                    <span onclick="login()">Login</span>
+                    <span onclick="register()">Register</span>
+                    <hr id="Indicator">
+                </div>
+                <form id="RegForm" method="post">
+                    <input type="text" name="identifiant" placeholder="identifiant">
+                    <input type="email" name="email" placeholder="email">
+                    <input type="password" name="password" placeholder="mot de passe">
+                    <input type="text" name="Nom" placeholder="Nom">
+                    <input type="text" name="Prenom" placeholder="Prenom">
+                    <input type="text" name="Adresse" placeholder="Adresse">
+                    <input type="text" name="Ville" placeholder="Ville">
+                    <input type="text" name="Pays" placeholder="Pays">
+                    <input type="number" name="CodePostal" placeholder="CodePostal">
+                    <input type="number" name="Telephone" placeholder="Telephone">
 
-    <section id="form-compte" class="section-p1">
-        <div class="form-container">
-            <div class="form-btn">
-                <span onclick="login()">Login</span>
-                <span onclick="register()">Register</span>
-                <hr id="Indicator">
+                    <?php
+                    $sql = 'SELECT * FROM TypeRole WHERE IdTypeRole != 1 ORDER BY IdTypeRole DESC';
+                    $req = $db->prepare($sql);
+                    $req->execute();
+                    $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+                    <select name="TypeRole">
+                        <?php
+                        foreach ($result as $row) { ?>
+                            <option value="<?php echo $row['IdTypeRole']; ?>"><?php echo $row['TypeRole']; ?></option>
+                        <?php
+                        } ?>
+                    </select>
+                    <button type="submit" name="btn-register" class="btn" onclick="verifRegister()">Register</button>
+                </form>
+                <form id="LoginForm" method="post">
+                    <input type="text" name="identifiant" placeholder="identifiant">
+                    <input type="password" name="password" placeholder="mot de passe">
+                    <button type="submit" name="btn-login" class="btn" onclick="verifLogin()">Login</button>
+                </form>
             </div>
-            <form id="RegForm" method="post">
-                <input type="text" name="identifiant" placeholder="identifiant">
-                <input type="email" name="email" placeholder="email">
-                <input type="password" name="password" placeholder="mot de passe">
-                <input type="text" name="Nom" placeholder="Nom">
-                <input type="text" name="Prenom" placeholder="Prenom">
-                <input type="text" name="Adresse" placeholder="Adresse">
-                <input type="text" name="Ville" placeholder="Ville">
-                <input type="text" name="Pays" placeholder="Pays">
-                <input type="number" name="CodePostal" placeholder="CodePostal">
-                <input type="number" name="Telephone" placeholder="Telephone">
+        </section>
+    <?php } ?>
+    <!-- front login ici -->
+    <?php
+    if (isset($_SESSION['IdUtilisateur'])) {
+        $sql = 'SELECT Pseudo, Email, Prenom, Nom, Photo, ImgFond AS Wallpaper, Adresse, Ville, Pays, CodePostal, Telephone, TypeRole AS Statut FROM utilisateur u LEFT JOIN typerole t ON t.IdTypeRole = u.IdTypeRole WHERE u.IdUtilisateur = :IdUtilisateur';
+        $req = $db->prepare($sql);
+        $req->execute(array(
+            ':IdUtilisateur' => intval($_SESSION["IdUtilisateur"])
+        ));
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+        $result = $result[0];
+    ?>
+
+
+        <section id="Page-Login" class="section-p1">
+
+            <div class="Login-Container">
+                <h2>Mon compte</h2>
+                <div class="Champ-User">
+
+                    <table>
+                        <?php
+                        $array_keys = array_keys($result);
+                        $i = 0;
+                        foreach ($result as $row) {
+                        ?>
+                            <tr>
+                                <td><?php echo $array_keys[$i]; ?> : </td>
+                                <td>
+                                    <?php if ($row != null) {
+                                        echo $row;
+                                    } else {
+                                        echo '<i>Non défini</i>';
+                                    } ?>
+                                </td>
+                            </tr>
+                        <?php
+                            $i++;
+                        } ?>
+                    </table>
+                </div>
+                <?php if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] != 3) { ?>
+                    <div>
+                        <h2>Ajouter un article</h2>
+                        <form method="POST">
+                            <input name="NomArticle" placeholder="Nom">
+                            <input name="Marque" placeholder="Marque">
+                            <input name="Img" placeholder="Image">
+                            <input name="QuantiteMax" type="number" placeholder="Quantite">
+                            <input name="Prix" type="number" placeholder="Prix">
+                            <b>Type d'article</b>
+                            <select name="IdTypeArticle">
+                                <?php
+                                $sql = 'SELECT * FROM typearticle';
+                                $req = $db->prepare($sql);
+                                $req->execute();
+                                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($result as $row) {
+                                ?>
+                                    <option value="<?php echo $row['IdTypeArticle'] ?>"><?php echo $row['TypeArticle'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <b>Type de Vente</b>
+                            <select name="IdTypeVente">
+                                <?php
+                                $sql = 'SELECT * FROM typevente';
+                                $req = $db->prepare($sql);
+                                $req->execute();
+                                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($result as $row) {
+                                ?>
+                                    <option value="<?php echo $row['IdTypeVente'] ?>"><?php echo $row['TypeVente'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <textarea name="Description"></textarea>
+                            <button name="addArticle" type="submit">Ajouter l'article</button>
+                        </form>
+                    </div>
+                <?php }
+
+                // Création Article
+
+                if (isset($_POST['addArticle'])) {
+                    if ($_POST["NomArticle"] != '' && $_POST["Marque"] != '' && $_POST["Img"] != '' && $_POST["QuantiteMax"] != '' && $_POST["Prix"] != '' && $_POST["IdTypeArticle"] != '' && $_POST["IdTypeVente"] != '') {
+                        $sql = 'INSERT INTO article SET IdUtilisateur = :IdUtilisateur, NomArticle = :NomArticle, Marque = :Marque, Img = :Img, QuantiteMax = :QuantiteMax, Prix = :Prix, IdTypeArticle = :IdTypeArticle, IdTypeVente = :IdTypeVente, Description = :Description';
+                        $req = $db->prepare($sql);
+                        $req->execute(array(
+                            ':IdUtilisateur' => ($_SESSION['IdUtilisateur']),
+                            ':NomArticle' => ($_POST["NomArticle"]),
+                            ':Marque' => ($_POST["Marque"]),
+                            ':Img' => ($_POST["Img"]),
+                            ':QuantiteMax' => (intval($_POST["QuantiteMax"])),
+                            ':Prix' => (floatval($_POST["Prix"])),
+                            ':IdTypeArticle' => (intval($_POST["IdTypeArticle"])),
+                            ':IdTypeVente' => (intval($_POST["IdTypeVente"])),
+                            ':Description' => ($_POST["Description"])
+                        ));
+                    } else {
+                        echo "<script>alert(\"Un champ obligatoire est vide\")</script>";
+                    }
+                }
+                ?>
+
 
                 <?php
-                $sql = 'SELECT * FROM TypeRole WHERE IdTypeRole != 1';
-                $req = $db->prepare($sql);
-                $req->execute();
-                $result = $req->fetchAll(PDO::FETCH_ASSOC);
-                ?>
-                <select name="TypeRole">
-                    <option value="">--Choisis ton rôle--</option>
-                    <?php
-                    foreach ($result as $row) { ?>
-                        <option value="<?php echo $row['IdTypeRole']; ?>"><?php echo $row['TypeRole']; ?></option>
-                    <?php
-                    } ?>
-                </select>
-                <button type="submit" name="btn-register" class="btn" onclick="verifRegister()">Register</button>
-            </form>
-            <form id="LoginForm" method="post">
-                <input type="text" name="identifiant" placeholder="identifiant">
-                <input type="password" name="password" placeholder="mot de passe">
-                <button type="submit" name="btn-login" class="btn" onclick="verifLogin()">Login</button>
-            </form>
-        </div>
-    </section>
-
-    <?php
-    //Register
-    if (isset($_POST['btn-register'])) {
-        if ($_POST["email"] != '' && $_POST["identifiant"] != '' && $_POST["password"] != '' && $_POST["Nom"] != '' && $_POST["Prenom"] != '' && $_POST["Adresse"] != '' && $_POST["Ville"] != '' && $_POST["Pays"] != '' && $_POST["CodePostal"] != '' && $_POST["Telephone"] != '' && $_POST["TypeRole"] != '') {
-            $sql = 'INSERT INTO utilisateur SET Pseudo = :Pseudo, Email = :Email, Password = :Password, Prenom = :Prenom, Nom = :Nom, Adresse = :Adresse, Ville = :Ville, Pays = :Pays, CodePostal = :CodePostal, Telephone = :Telephone, IdTypeRole = :IdTypeRole';
-
-            $req = $db->prepare($sql);
-            $req->execute(array(
-                ':Pseudo' => ($_POST["identifiant"]),
-                ':Email' => ($_POST["email"]),
-                ':Password' => ($_POST["password"]),
-                ':Prenom' => ($_POST["Prenom"]),
-                ':Nom' => ($_POST["Nom"]),
-                ':Adresse' => ($_POST["Adresse"]),
-                ':Ville' => ($_POST["Ville"]),
-                ':Pays' => ($_POST["Pays"]),
-                ':CodePostal' => (intval($_POST["CodePostal"])),
-                ':Telephone' => (intval($_POST["Telephone"])),
-                ':IdTypeRole' => (intval($_POST["TypeRole"]))
-            ));
-
-            session_start();
-            $_SESSION['IdUtilisateur'] = $db->lastInsertId();
-            $_SESSION['Pseudo'] = $_POST["identifiant"];
-        } else {
-            echo "<script>alert(\"Un champ est vide\")</script>";
-        }
-    }
-    //Login
-    if (isset($_POST['btn-login'])) {
-        if ($_POST["identifiant"] != '' && $_POST["password"] != '') {
-            //commencer le query
-            $sql = "SELECT * FROM utilisateur u WHERE u.Pseudo = :Pseudo AND u.Password = :Password";
-            $req = $db->prepare($sql);
-            $req->execute(array(
-                ':Pseudo' => ($_POST["identifiant"]),
-                ':Password' => ($_POST["password"])
-            ));
-            $result = $req->fetchAll(PDO::FETCH_ASSOC);
-            if(count($result)>0)
-            {
-                session_start();
-                $_SESSION['IdUtilisateur'] = $result[0]['IdUtilisateur'];
-                $_SESSION['Pseudo'] = $result[0]['Pseudo'];
-            }
-        }
-    }
-    ?>
-    <!-- front login ici -->
+                // Liste users
+                if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] == 1) { ?>
+                    <div>
+                        <h2>liste Utilisateurs</h2>
+                        <table>
+                            <thead>
+                                <td>IdUtilisateur</td>
+                                <td>Pseudo</td>
+                                <td>Email</td>
+                                <td>Role</td>
+                                <td></td>
+                            </thead>
+                            <?php
+                            if (isset($_SESSION['IdUtilisateur'])) {
+                                $sql = 'SELECT IdUtilisateur, Pseudo, Email, u.IdTypeRole, TypeRole FROM utilisateur u LEFT JOIN typerole t ON t.IdTypeRole = u.IdTypeRole ORDER BY DateCreation';
+                                $req = $db->prepare($sql);
+                                $req->execute();
+                                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($result as $row) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo $row['IdUtilisateur']; ?></td>
+                                        <td><?php echo $row['Pseudo']; ?></td>
+                                        <td><?php echo $row['Email']; ?></td>
+                                        <td><?php echo $row['TypeRole']; ?></td>
+                                        <?php if ($row['IdTypeRole'] == 1) { ?>
+                                            <td class="delete-disable"><i class="fa-solid fa-trash"></i></td>
+                                        <?php } else { ?>
+                                            <td><a href="compte.php?IdUtilisateur=<?php echo $row['IdUtilisateur']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                        <?php } ?>
+                                    </tr>
+                            <?php }
+                            } ?>
+                        </table>
+                    </div>
+                <?php } ?>
+            </div>
+        </section>
+    <?php } ?>
     <footer class="section-p1">
         <div class="col">
             <img class="logo" src="logo_blanc.png" alt="">

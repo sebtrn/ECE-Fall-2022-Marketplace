@@ -1,3 +1,6 @@
+<?php include 'conn.php';
+session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +23,10 @@
                 <li><a href="about.php">About</a></li>
                 <li><a class="active" href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
+                <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
                 <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                <?php } ?>
             </ul>
         </div>
     </section>

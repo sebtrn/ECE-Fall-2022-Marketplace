@@ -23,7 +23,10 @@ session_start();?>
                 <li><a href="about.php">About</a></li>
                 <li><a href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
+                <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
                 <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                <?php } ?>
             </ul>
         </div>
     </section>
@@ -56,7 +59,7 @@ session_start();?>
         <?php
 
         // Lister tous les articles
-        $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0';
+        $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
         $req = $db->prepare($sql);
         $req->execute();
         $result = $req->fetchAll(PDO::FETCH_ASSOC);

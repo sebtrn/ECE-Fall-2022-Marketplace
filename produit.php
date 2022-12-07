@@ -50,7 +50,10 @@ $result = $result[0];
                 <li><a href="about.php">About</a></li>
                 <li><a href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
+                <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
                 <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                <?php } ?>
             </ul>
         </div>
     </section>
@@ -86,7 +89,7 @@ $result = $result[0];
         <p>Collection Hiver/Printemps</p>
         <div class="pro-container">
             <?php
-            $sql = 'SELECT * FROM article a WHERE a.IdArticle != :IdArticle ORDER BY a.DateCreation LIMIT 4';
+            $sql = 'SELECT * FROM article a WHERE a.IdArticle != :IdArticle ORDER BY a.DateCreation DESC LIMIT 4';
             $req = $db->prepare($sql);
             $req->execute(array(
                 ':IdArticle' => intval($_GET["IdArticle"])
