@@ -97,31 +97,27 @@ session_start();?>
     <section id="sm-banner" class="section-p1">
         <div class="banner-box">
             <h4>Offres du moment</h4>
-            <h2>Les classiques</h2>
+            <h2>Les Pulls</h2>
             <span>Produits minutieusement choisis par l'équipe</span>
-            <button class="white">Découvrir</button>
+            <a href="shop.php?IdTypeArticle=2"><button class="white">Découvrir</button></a>
         </div>
         <div class="banner-box banner-box2">
-            <h4>T-Shirt et Pull</h4>
-            <h2>Parfait pour l'hiver</h2>
+            <h4>T-Shirt</h4>
             <span>Qu'attendez vous</span>
-            <button class="white">Découvrir</button>
-        </div>
-    </section>
-    <section id="banner3">
-        <div class="banner-box">
-            <h2>BLACKFRIDAY</h2>
-            <h3>Du 01/12 au 31/12</h3>
-        </div>
-        <div class="banner-box banner-box2">
-            <h2>Nouvelles Sneakers</h2>
-            <h3>Style décontracté</h3>
+            <a href="shop.php?IdTypeArticle=1"><button class="white">Découvrir</button></a>
         </div>
         <div class="banner-box banner-box3">
-            <h2>Etudiant ECE</h2>
-            <h3>-20% OFF</h3>
+            <h4>Pantalon</h4>
+            <span>Qu'attendez vous</span>
+            <a href="shop.php?IdTypeArticle=3"><button class="white">Découvrir</button></a>
+        </div>
+        <div class="banner-box banner-box4">
+            <h4>Chaussures</h4>
+            <span>Qu'attendez vous</span>
+            <a href="shop.php?IdTypeArticle=4"><button class="white">Découvrir</button></a>
         </div>
     </section>
+    
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
             <h4>S'inscrire à la newsletter</h4>

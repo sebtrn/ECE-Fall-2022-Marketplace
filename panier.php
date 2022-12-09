@@ -122,7 +122,7 @@ if(isset($_GET['IdPanier'])){
                     <td><strong><?php echo $result[0]['PrixTotal']; ?>€</strong></td>
                 </tr>
             </table>
-            <button class="normal">Paiement</button>
+            <a href="paiement.php"><button class="normal">Paiement</button></a>
             
         </div>
         

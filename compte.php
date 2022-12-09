@@ -178,12 +178,17 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
                 <?php if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] != 3) { ?>
                     <div>
                         <h2>Ajouter un article</h2>
-                        <form method="POST">
+                        <form method="POST" class="form-ajouter">
                             <input name="NomArticle" placeholder="Nom">
+                            <br>
                             <input name="Marque" placeholder="Marque">
+                            <br>
                             <input name="Img" placeholder="Image">
+                            <br>
                             <input name="QuantiteMax" type="number" placeholder="Quantite">
+                            <br>
                             <input name="Prix" type="number" placeholder="Prix">
+                            <br>
                             <b>Type d'article</b>
                             <select name="IdTypeArticle">
                                 <?php
@@ -196,6 +201,7 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
                                     <option value="<?php echo $row['IdTypeArticle'] ?>"><?php echo $row['TypeArticle'] ?></option>
                                 <?php } ?>
                             </select>
+                            <br>
                             <b>Type de Vente</b>
                             <select name="IdTypeVente">
                                 <?php
@@ -208,7 +214,9 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
                                     <option value="<?php echo $row['IdTypeVente'] ?>"><?php echo $row['TypeVente'] ?></option>
                                 <?php } ?>
                             </select>
+                            <br>
                             <textarea name="Description"></textarea>
+                            <br>
                             <button name="addArticle" type="submit">Ajouter l'article</button>
                         </form>
                     </div>
