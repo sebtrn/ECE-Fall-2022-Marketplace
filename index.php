@@ -50,7 +50,7 @@ session_start(); ?>
         </ul>
     </section>
     <section id="produit1" class="section-p1">
-        <h2>Best-sellers</h2>
+        <h2>Selection du jour</h2>
         <p>Collection Hiver - Printemps</p>
         <div class="pro-container">
 
