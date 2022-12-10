@@ -190,7 +190,7 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
                         <br>
                         <input name="Prix" type="number" placeholder="Prix">
                         <br>
-                        <b>Type d'article</b>
+
                         <select name="IdTypeArticle">
                             <?php
                             $sql = 'SELECT * FROM typearticle';
@@ -203,7 +203,7 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
                             <?php } ?>
                         </select>
                         <br>
-                        <b>Type de Vente</b>
+
                         <select name="IdTypeVente">
                             <?php
                             $sql = 'SELECT * FROM typevente';
