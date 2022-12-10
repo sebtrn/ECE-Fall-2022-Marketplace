@@ -151,10 +151,10 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
         <section id="Page-Login" class="section-p1">
 
             <div class="Login-Container">
-                <h2>Mon compte</h2>
-                <div class="Champ-User">
 
+                <div class="Champ-User">
                     <table>
+
                         <?php
                         $array_keys = array_keys($result);
                         $i = 0;
@@ -175,115 +175,116 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
                         } ?>
                     </table>
                 </div>
-                <?php if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] != 3) { ?>
-                    <div>
-                        <h2>Ajouter un article</h2>
-                        <form method="POST" class="form-ajouter">
-                            <input name="NomArticle" placeholder="Nom">
-                            <br>
-                            <input name="Marque" placeholder="Marque">
-                            <br>
-                            <input name="Img" placeholder="Image">
-                            <br>
-                            <input name="QuantiteMax" type="number" placeholder="Quantite">
-                            <br>
-                            <input name="Prix" type="number" placeholder="Prix">
-                            <br>
-                            <b>Type d'article</b>
-                            <select name="IdTypeArticle">
-                                <?php
-                                $sql = 'SELECT * FROM typearticle';
-                                $req = $db->prepare($sql);
-                                $req->execute();
-                                $result = $req->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                ?>
-                                    <option value="<?php echo $row['IdTypeArticle'] ?>"><?php echo $row['TypeArticle'] ?></option>
-                                <?php } ?>
-                            </select>
-                            <br>
-                            <b>Type de Vente</b>
-                            <select name="IdTypeVente">
-                                <?php
-                                $sql = 'SELECT * FROM typevente';
-                                $req = $db->prepare($sql);
-                                $req->execute();
-                                $result = $req->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                ?>
-                                    <option value="<?php echo $row['IdTypeVente'] ?>"><?php echo $row['TypeVente'] ?></option>
-                                <?php } ?>
-                            </select>
-                            <br>
-                            <textarea name="Description"></textarea>
-                            <br>
-                            <button name="addArticle" type="submit">Ajouter l'article</button>
-                        </form>
-                    </div>
-                <?php }
-
-                // Création Article
-
-                if (isset($_POST['addArticle'])) {
-                    if ($_POST["NomArticle"] != '' && $_POST["Marque"] != '' && $_POST["Img"] != '' && $_POST["QuantiteMax"] != '' && $_POST["Prix"] != '' && $_POST["IdTypeArticle"] != '' && $_POST["IdTypeVente"] != '') {
-                        $sql = 'INSERT INTO article SET IdUtilisateur = :IdUtilisateur, NomArticle = :NomArticle, Marque = :Marque, Img = :Img, QuantiteMax = :QuantiteMax, Prix = :Prix, IdTypeArticle = :IdTypeArticle, IdTypeVente = :IdTypeVente, Description = :Description';
-                        $req = $db->prepare($sql);
-                        $req->execute(array(
-                            ':IdUtilisateur' => ($_SESSION['IdUtilisateur']),
-                            ':NomArticle' => ($_POST["NomArticle"]),
-                            ':Marque' => ($_POST["Marque"]),
-                            ':Img' => ($_POST["Img"]),
-                            ':QuantiteMax' => (intval($_POST["QuantiteMax"])),
-                            ':Prix' => (floatval($_POST["Prix"])),
-                            ':IdTypeArticle' => (intval($_POST["IdTypeArticle"])),
-                            ':IdTypeVente' => (intval($_POST["IdTypeVente"])),
-                            ':Description' => ($_POST["Description"])
-                        ));
-                    } else {
-                        echo "<script>alert(\"Un champ obligatoire est vide\")</script>";
-                    }
-                }
-                ?>
-
-
-                <?php
-                // Liste users
-                if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] == 1) { ?>
-                    <div>
-                        <h2>liste Utilisateurs</h2>
-                        <table>
-                            <thead>
-                                <td>IdUtilisateur</td>
-                                <td>Pseudo</td>
-                                <td>Email</td>
-                                <td>Role</td>
-                                <td></td>
-                            </thead>
-                            <?php
-                            if (isset($_SESSION['IdUtilisateur'])) {
-                                $sql = 'SELECT IdUtilisateur, Pseudo, Email, u.IdTypeRole, TypeRole FROM utilisateur u LEFT JOIN typerole t ON t.IdTypeRole = u.IdTypeRole ORDER BY DateCreation';
-                                $req = $db->prepare($sql);
-                                $req->execute();
-                                $result = $req->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                            ?>
-                                    <tr>
-                                        <td><?php echo $row['IdUtilisateur']; ?></td>
-                                        <td><?php echo $row['Pseudo']; ?></td>
-                                        <td><?php echo $row['Email']; ?></td>
-                                        <td><?php echo $row['TypeRole']; ?></td>
-                                        <?php if ($row['IdTypeRole'] == 1) { ?>
-                                            <td class="delete-disable"><i class="fa-solid fa-trash"></i></td>
-                                        <?php } else { ?>
-                                            <td><a href="compte.php?IdUtilisateur=<?php echo $row['IdUtilisateur']; ?>"><i class="fa-solid fa-trash"></i></a></td>
-                                        <?php } ?>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </table>
-                    </div>
-                <?php } ?>
             </div>
+            <?php if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] != 3) { ?>
+                <div id="Ajout-Container">
+                    <h2>Ajouter un article</h2>
+                    <form method="POST" class="form-ajouter">
+                        <input name="NomArticle" placeholder="Nom">
+                        <br>
+                        <input name="Marque" placeholder="Marque">
+                        <br>
+                        <input name="Img" placeholder="Image">
+                        <br>
+                        <input name="QuantiteMax" type="number" placeholder="Quantite">
+                        <br>
+                        <input name="Prix" type="number" placeholder="Prix">
+                        <br>
+                        <b>Type d'article</b>
+                        <select name="IdTypeArticle">
+                            <?php
+                            $sql = 'SELECT * FROM typearticle';
+                            $req = $db->prepare($sql);
+                            $req->execute();
+                            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($result as $row) {
+                            ?>
+                                <option value="<?php echo $row['IdTypeArticle'] ?>"><?php echo $row['TypeArticle'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <br>
+                        <b>Type de Vente</b>
+                        <select name="IdTypeVente">
+                            <?php
+                            $sql = 'SELECT * FROM typevente';
+                            $req = $db->prepare($sql);
+                            $req->execute();
+                            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($result as $row) {
+                            ?>
+                                <option value="<?php echo $row['IdTypeVente'] ?>"><?php echo $row['TypeVente'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <br>
+                        <textarea name="Description"></textarea>
+                        <br>
+                        <button name="addArticle" type="submit" class="normal">Ajouter l'article</button>
+                    </form>
+                </div>
+            <?php }
+
+            // Création Article
+
+            if (isset($_POST['addArticle'])) {
+                if ($_POST["NomArticle"] != '' && $_POST["Marque"] != '' && $_POST["Img"] != '' && $_POST["QuantiteMax"] != '' && $_POST["Prix"] != '' && $_POST["IdTypeArticle"] != '' && $_POST["IdTypeVente"] != '') {
+                    $sql = 'INSERT INTO article SET IdUtilisateur = :IdUtilisateur, NomArticle = :NomArticle, Marque = :Marque, Img = :Img, QuantiteMax = :QuantiteMax, Prix = :Prix, IdTypeArticle = :IdTypeArticle, IdTypeVente = :IdTypeVente, Description = :Description';
+                    $req = $db->prepare($sql);
+                    $req->execute(array(
+                        ':IdUtilisateur' => ($_SESSION['IdUtilisateur']),
+                        ':NomArticle' => ($_POST["NomArticle"]),
+                        ':Marque' => ($_POST["Marque"]),
+                        ':Img' => ($_POST["Img"]),
+                        ':QuantiteMax' => (intval($_POST["QuantiteMax"])),
+                        ':Prix' => (floatval($_POST["Prix"])),
+                        ':IdTypeArticle' => (intval($_POST["IdTypeArticle"])),
+                        ':IdTypeVente' => (intval($_POST["IdTypeVente"])),
+                        ':Description' => ($_POST["Description"])
+                    ));
+                } else {
+                    echo "<script>alert(\"Un champ obligatoire est vide\")</script>";
+                }
+            }
+            ?>
+
+
+            <?php
+            // Liste users
+            if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] == 1) { ?>
+                <div>
+                    <h2>liste Utilisateurs</h2>
+                    <table>
+                        <thead>
+                            <td>IdUtilisateur</td>
+                            <td>Pseudo</td>
+                            <td>Email</td>
+                            <td>Role</td>
+                            <td></td>
+                        </thead>
+                        <?php
+                        if (isset($_SESSION['IdUtilisateur'])) {
+                            $sql = 'SELECT IdUtilisateur, Pseudo, Email, u.IdTypeRole, TypeRole FROM utilisateur u LEFT JOIN typerole t ON t.IdTypeRole = u.IdTypeRole ORDER BY DateCreation';
+                            $req = $db->prepare($sql);
+                            $req->execute();
+                            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($result as $row) {
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['IdUtilisateur']; ?></td>
+                                    <td><?php echo $row['Pseudo']; ?></td>
+                                    <td><?php echo $row['Email']; ?></td>
+                                    <td><?php echo $row['TypeRole']; ?></td>
+                                    <?php if ($row['IdTypeRole'] == 1) { ?>
+                                        <td class="delete-disable"><i class="fa-solid fa-trash"></i></td>
+                                    <?php } else { ?>
+                                        <td><a href="compte.php?IdUtilisateur=<?php echo $row['IdUtilisateur']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+                                    <?php } ?>
+                                </tr>
+                        <?php }
+                        } ?>
+                    </table>
+                </div>
+            <?php } ?>
+
         </section>
     <?php } ?>
     <footer class="section-p1">

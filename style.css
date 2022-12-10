@@ -925,25 +925,29 @@ form .btn:focus {
 
 /* Login Page */
 
+#Page-Login{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #Page-Login .Login-Container {
     background: #fff;
-    width: 1400px;
-    height: 1400px;
+    width: 450px;
+    height: 390px;
     position: relative;
     text-align: center;
-    padding: 20px 0;
-    margin: auto;
+    margin-bottom: 100px;
+    margin-top: auto;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 #Page-Login .Login-Container h2 {
-    padding-top: 40px;
     font-size: 30px;
 }
 
 #Page-Login .Login-Container table {
-    padding-top: 50px;
-    padding-left: 20px;
+    padding-top: 40px;
+    padding-left: 40px;
     justify-content: center;
 }
 
@@ -951,10 +955,22 @@ form .btn:focus {
     padding: 40px 40px;
 }
 
+#Ajout-Container{
+    background: #fff;
+    width: 700px;
+    height: 560px;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+}
+
 #Page-Login .Login-Container .Champ-User {
+    
     justify-content: left;
     text-align: left;
 }
+
 
 .form-ajouter input {
     width: 28%;
