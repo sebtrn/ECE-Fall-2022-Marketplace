@@ -1,5 +1,5 @@
 <?php include 'conn.php';
-session_start();?>
+session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +11,7 @@ session_start();?>
     <title>OMNES MarketPlace</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css" />
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -24,8 +25,8 @@ session_start();?>
                 <li><a href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
                 <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
-                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                    <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -37,57 +38,53 @@ session_start();?>
         <br>
         <button>Shop Now</button>
     </section>
-    <section id="feature" class="section-p1">
-        <div class="fe-box">
-            <img src="img/features/f1.png" alt="">
-            <h6>100% en ligne</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/f2.png" alt="">
-            <h6>Livraison express</h6>
-        </div>
-        <div class="fe-box">
-            <img src="img/features/f6.png" alt="">
-            <h6>24/7 Support</h6>
-        </div>
+    <section id="carrousel" class="section-p1">
+        <ul>
+            <li><img src="img/products/n2.jpg" height="700px" width="700px" /></li>
+            <li><img src="img/products/n3.jpg" height="700px" width="700px" /></li>
+            <li><img src="img/products/n4.jpg" height="700px" width="700px" /></li>
+            <li><img src="img/products/n5.jpg" height="700px" width="700px" /></li>
+            <li><img src="img/products/n6.jpg" height="700px" width="700px" /></li>
+            <li><img src="img/products/n7.jpg" height="700px" width="700px" /></li>
+            <li><img src="img/products/n8.jpg" height="700px" width="700px" /></li>
+        </ul>
     </section>
     <section id="produit1" class="section-p1">
         <h2>Best-sellers</h2>
         <p>Collection Hiver - Printemps</p>
         <div class="pro-container">
 
-        <?php
-
-        // Lister tous les articles
-        $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
-        $req = $db->prepare($sql);
-        $req->execute();
-        $result = $req->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($result as $row)
-        {
-            ?>
-            <div class="pro">
-                <img src="<?php echo $row['Img']; ?>" alt="">
-                <div class="description">
-                    <span><?php echo $row['Marque']; ?></span>
-                    <h5> <?php echo $row['NomArticle']; ?> </h5>
-                    <div class="note">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4><?php echo $row['Prix']; ?>€ </h4>
-                </div>
-                <a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>">
-                    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-                </a>
-            </div>
             <?php
-        }
-        ?>
+
+            // Lister tous les articles
+            $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
+            $req = $db->prepare($sql);
+            $req->execute();
+            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($result as $row) {
+            ?>
+                <div class="pro">
+                    <img src="<?php echo $row['Img']; ?>" alt="">
+                    <div class="description">
+                        <span><?php echo $row['Marque']; ?></span>
+                        <h5> <?php echo $row['NomArticle']; ?> </h5>
+                        <div class="note">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4><?php echo $row['Prix']; ?>€ </h4>
+                    </div>
+                    <a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>">
+                        <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+                    </a>
+                </div>
+            <?php
+            }
+            ?>
     </section>
     <section id="banner" class="section-m1">
         <h2>Black Friday</h2>
@@ -117,7 +114,7 @@ session_start();?>
             <a href="shop.php?IdTypeArticle=4"><button class="white">Découvrir</button></a>
         </div>
     </section>
-    
+
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
             <h4>S'inscrire à la newsletter</h4>
@@ -130,7 +127,7 @@ session_start();?>
     </section>
     <footer class="section-p1">
         <div class="col">
-            <img class="logo"src="logo_blanc.png" alt="">
+            <img class="logo" src="logo_blanc.png" alt="">
             <h4>Contact</h4>
             <p><strong>Adresse:</strong> Rue Sextius Michel, 75015 Paris</p>
             <p><strong>Téléphone:</strong>01 44 39 06 00</p>
@@ -146,20 +143,19 @@ session_start();?>
             </div>
         </div>
         <div class="col">
-            <h4>About</h4>
-            <a href="#">About</a>
+            <h4>A propos</h4>
+            <a href="about.php">About</a>
             <a href="#">Livraison & retours</a>
-            <a href="#">Conditions générales</a>
-            <a href="#">Confidentialité et cookies</a>
-            <a href="#">Contactez-nous</a>
+            <a href="about.php">Conditions générales</a>
+            <a href="about.php">Confidentialité et cookies</a>
+            <a href="about.php">Contactez-nous</a>
         </div>
         <div class="col">
             <h4>Mon compte</h4>
-            <a href="#">Se connecter</a>
-            <a href="#">Mon panier</a>
-            <a href="#">Ma wishlist</a>
-            <a href="#">Suivi de commande</a>
-            <a href="#">Assistance</a>
+            <a href="compte.php">Se connecter</a>
+            <a href="panier.php">Mon panier</a>
+            <a href="panier.php">Ma wishlist</a>
+            <a href="about.php">Assistance</a>
         </div>
         <div class="col install">
             <h4>Application mobile</h4>
@@ -175,6 +171,54 @@ session_start();?>
             <p>©Projet Web dynamique 2022 - OMNES Marketplace Groupe 971</p>
         </div>
     </footer>
+    <script>
+        $(document).ready(function() {
+            var $carrousel = $('#carrousel'); // on cible le bloc du carrousel
+            $img = $('#carrousel img'); // on cible les images contenues dans le carrousel
+            indexImg = $img.length - 1; // on définit l'index du dernier élément
+            i = 0; // on initialise un compteur
+            $currentImg = $img.eq(i); // enfin, on cible l'image courante, qui possède l'index i (0 pour l'instant)
+            $img.css('display', 'none'); // on cache les images
+            $currentImg.css('display', 'block'); // on affiche seulement l'image courante
+            //si on clique sur le bouton "Suivant"
+            $('.next').click(function() { // image suivante
+                i++; // on incrémente le compteur
+                if (i <= indexImg) {
+                    $img.css('display', 'none'); // on cache les images
+                    $currentImg = $img.eq(i); // on définit la nouvelle image
+                    $currentImg.css('display', 'block'); // puis on l'affiche
+                } else {
+                    i = indexImg;
+                }
+            });
+            //si on clique sur le bouton "Précédent"
+            $('.prev').click(function() { // image précédente
+                i--; // on décrémente le compteur, puis on réalise la même chose que pour la fonction "suivante"
+                if (i >= 0) {
+                    $img.css('display', 'none');
+                    $currentImg = $img.eq(i);
+                    $currentImg.css('display', 'block');
+                } else {
+                    i = 0;
+                }
+            });
+
+            function slideImg() {
+                setTimeout(function() { // on utilise une fonction anonyme
+                    if (i < indexImg) { // si le compteur est inférieur au dernier index
+                        i++; // on l'incrémente
+                    } else { // sinon, on le remet à 0 (première image)
+                        i = 0;
+                    }
+                    $img.css('display', 'none');
+                    $currentImg = $img.eq(i);
+                    $currentImg.css('display', 'block');
+                    slideImg(); // on oublie pas de relancer la fonction à la fin
+                }, 4000); // on définit l'intervalle à 4000 millisecondes (4s)
+            }
+            slideImg(); // enfin, on lance la fonction une première fois
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 

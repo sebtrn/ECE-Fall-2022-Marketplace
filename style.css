@@ -733,7 +733,7 @@ footer .copyright {
     margin: auto;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    
+
 }
 
 .form-container span {
@@ -756,7 +756,7 @@ footer .copyright {
     position: absolute;
     top: 130px;
     transition: transform 1s;
-    
+
 }
 
 form input {
@@ -781,19 +781,19 @@ form .btn {
     cursor: pointer;
 }
 
-form .btn:focus{
+form .btn:focus {
     outline: none;
 }
 
-#LoginForm{
+#LoginForm {
     left: -300px;
 }
 
-#RegisterForm{
-    left:0;
+#RegisterForm {
+    left: 0;
 }
 
-#Indicator{
+#Indicator {
     width: 100px;
     border: none;
     background: #ff523b;
@@ -803,84 +803,88 @@ form .btn:focus{
     transition: transform 1s;
 }
 
-.delete-disable{
+.delete-disable {
     color: rgb(167, 167, 167);
 }
 
 /* Panier */
 
-#panier table{
+#panier table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     white-space: nowrap;
 }
 
-#panier table img{
+#panier table img {
     width: 70px;
 }
 
-#panier table td:nth-child(1){
+#panier table td:nth-child(1) {
     width: 100px;
     text-align: center;
 }
 
-#panier table td:nth-child(2){
+#panier table td:nth-child(2) {
     width: 150px;
     text-align: center;
 }
-#panier table td:nth-child(3){
+
+#panier table td:nth-child(3) {
     width: 250px;
     text-align: center;
 }
 
-#panier table td:nth-child(4),#panier table td:nth-child(5),#panier table td:nth-child(6){
+#panier table td:nth-child(4),
+#panier table td:nth-child(5),
+#panier table td:nth-child(6) {
     width: 150px;
     text-align: center;
 }
 
-#panier table td:nth-child(5) input{
+#panier table td:nth-child(5) input {
     width: 70px;
     padding: 10px 5px 10px 15px;
 }
 
-#panier table thead{
+#panier table thead {
     border: 1px solid #e2e9e1;
     border-left: none;
     border-right: none;
 }
 
-#panier table thead td{
+#panier table thead td {
     font-weight: 700;
     text-transform: uppercase;
     font-size: 13px;
     padding: 18px 0;
 }
 
-#panier table tbody tr td{
+#panier table tbody tr td {
     padding-top: 15px;
 }
 
-#panier table tbody td{
+#panier table tbody td {
     font-size: 13px;
 }
 
-#panier-bottom{
+#panier-bottom {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-#coupon{
+#coupon {
     width: 50%;
     margin-bottom: 30px;
 }
 
-#coupon h3, #subtotal h3{
+#coupon h3,
+#subtotal h3 {
     padding-bottom: 15px;
 }
 
-#coupon input{
+#coupon input {
     padding: 10px 20px;
     outline: none;
     width: 60%;
@@ -889,39 +893,39 @@ form .btn:focus{
 }
 
 #coupon button,
-#subtotal button{
+#subtotal button {
     background-color: #088178;
     color: #fff;
     padding: 12px 20px;
 }
 
-#subtotal{
+#subtotal {
     width: 50%;
     margin-bottom: 30px;
     border: 1px solid #e2e9e1;
     padding: 30px;
 }
 
-#subtotal table{
+#subtotal table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 20px;
 }
 
-#subtotal table td{
+#subtotal table td {
     width: 50%;
     border: 1px solid #e2e9e1;
     padding: 10px;
     font-size: 13px;
 }
 
-#panier  a{
+#panier a {
     color: #000;
 }
 
 /* Login Page */
 
-#Page-Login .Login-Container{
+#Page-Login .Login-Container {
     background: #fff;
     width: 1400px;
     height: 1400px;
@@ -932,53 +936,53 @@ form .btn:focus{
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-#Page-Login .Login-Container h2{
+#Page-Login .Login-Container h2 {
     padding-top: 40px;
     font-size: 30px;
 }
 
- #Page-Login .Login-Container table{
+#Page-Login .Login-Container table {
     padding-top: 50px;
     padding-left: 20px;
     justify-content: center;
- }
+}
 
- #Page-Login .Login-Container h3{
+#Page-Login .Login-Container h3 {
     padding: 40px 40px;
- }
+}
 
- #Page-Login .Login-Container .Champ-User{
+#Page-Login .Login-Container .Champ-User {
     justify-content: left;
     text-align: left;
- }
+}
 
-.form-ajouter input{
+.form-ajouter input {
     width: 28%;
     height: 30px;
     margin: 10px 0;
     padding: 0 10px;
     border: 1px solid #ccc;
- }
+}
 
- .form-ajouter select{
+.form-ajouter select {
     width: 28%;
     height: 30px;
     margin: 10px 0;
     padding: 0 10px;
     border: 1px solid #ccc;
- }
+}
 
- .form-ajouter textarea{
+.form-ajouter textarea {
     width: 38%;
     height: 30px;
     margin: 10px 0;
     padding: 0 10px;
     border: 1px solid #ccc;
- }
+}
 
- /* Page de paiement */
+/* Page de paiement */
 
- .paiement-container{
+.paiement-container {
     min-height: 100vh;
     background: #eee;
     display: flex;
@@ -988,156 +992,193 @@ form .btn:focus{
     padding-bottom: 60px;
 }
 
-.paiement-container form{
+.paiement-container form {
     background: #fff;
     border-radius: 5px;
-    box-shadow: 0 10px 15px rgba(0,0,0,.1);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .1);
     padding: 20px;
     width: 600px;
     padding-top: 160px;
 }
 
-.paiement-container form .inputBox{
+.paiement-container form .inputBox {
     margin-top: 20px;
 }
 
-.paiement-container form .inputBox span{
+.paiement-container form .inputBox span {
     display: block;
-    color:#999;
+    color: #999;
     padding-bottom: 5px;
 }
 
 .paiement-container form .inputBox input,
-.paiement-container form .inputBox select{
+.paiement-container form .inputBox select {
     width: 100%;
     padding: 10px;
     border-radius: 10px;
-    border:1px solid rgba(0,0,0,.3);
-    color:#444;
+    border: 1px solid rgba(0, 0, 0, .3);
+    color: #444;
 }
 
-.paiement-container form .flexbox{
+.paiement-container form .flexbox {
     display: flex;
-    gap:15px;
+    gap: 15px;
 }
 
-.paiement-container form .flexbox .inputBox{
-    flex:1 1 150px;
+.paiement-container form .flexbox .inputBox {
+    flex: 1 1 150px;
 }
 
-.paiement-container form .submit-btn{
+.paiement-container form .submit-btn {
     width: 100%;
-    background:#088178;
+    background: #088178;
     margin-top: 20px;
     padding: 10px;
     font-size: 20px;
-    color:#fff;
+    color: #fff;
     border-radius: 10px;
     cursor: pointer;
     transition: .2s linear;
 }
 
-.paiement-container form .submit-btn:hover{
+.paiement-container form .submit-btn:hover {
     letter-spacing: 2px;
     opacity: .8;
 }
 
-.paiement-container .card-container{
+.paiement-container .card-container {
     margin-bottom: -150px;
     position: relative;
     height: 250px;
     width: 400px;
 }
 
-.paiement-container .card-container .front{
+.paiement-container .card-container .front {
     position: absolute;
     height: 100%;
     width: 100%;
-    top: 0; left: 0;
-    background:#088178;
+    top: 0;
+    left: 0;
+    background: #088178;
     border-radius: 5px;
     backface-visibility: hidden;
-    box-shadow: 0 15px 25px rgba(0,0,0,.2);
-    padding:20px;
-    transform:perspective(1000px) rotateY(0deg);
-    transition:transform .4s ease-out;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+    padding: 20px;
+    transform: perspective(1000px) rotateY(0deg);
+    transition: transform .4s ease-out;
 }
 
-.paiement-container .card-container .front .image{
+.paiement-container .card-container .front .image {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: space-between;
     padding-top: 10px;
 }
 
-.paiement-container .card-container .front .image img{
+.paiement-container .card-container .front .image img {
     height: 50px;
 }
 
-.paiement-container .card-container .front .card-number-box{
-    padding:30px 0;
+.paiement-container .card-container .front .card-number-box {
+    padding: 30px 0;
     font-size: 22px;
-    color:#fff;
+    color: #fff;
 }
 
-.paiement-container .card-container .front .flexbox{
+.paiement-container .card-container .front .flexbox {
     display: flex;
 }
 
-.paiement-container .card-container .front .flexbox .box:nth-child(1){
+.paiement-container .card-container .front .flexbox .box:nth-child(1) {
     margin-right: auto;
 }
 
-.paiement-container .card-container .front .flexbox .box{
+.paiement-container .card-container .front .flexbox .box {
     font-size: 15px;
-    color:#fff;
+    color: #fff;
 }
 
-.paiement-container .card-container .back{
+.paiement-container .card-container .back {
     position: absolute;
-    top:0; left: 0;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
-    background:#088178;
+    background: #088178;
     border-radius: 5px;
     padding: 20px 0;
     text-align: right;
     backface-visibility: hidden;
-    box-shadow: 0 15px 25px rgba(0,0,0,.2);
-    transform:perspective(1000px) rotateY(180deg);
-    transition:transform .4s ease-out;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2);
+    transform: perspective(1000px) rotateY(180deg);
+    transition: transform .4s ease-out;
 }
 
-.paiement-container .card-container .back .stripe{
+.paiement-container .card-container .back .stripe {
     background: #000;
     width: 100%;
     margin: 10px 0;
     height: 50px;
 }
 
-.paiement-container .card-container .back .box{
+.paiement-container .card-container .back .box {
     padding: 0 20px;
 }
 
-.paiement-container .card-container .back .box span{
-    color:#fff;
+.paiement-container .card-container .back .box span {
+    color: #fff;
     font-size: 15px;
 }
 
-.paiement-container .card-container .back .box .cvv-box{
+.paiement-container .card-container .back .box .cvv-box {
     height: 50px;
     padding: 10px;
     margin-top: 5px;
-    color:#333;
+    color: #333;
     background: #fff;
     border-radius: 5px;
     width: 100%;
 }
 
-.paiement-container .card-container .back .box img{
+.paiement-container .card-container .back .box img {
     margin-top: 30px;
     height: 30px;
 }
 
+/* Carrousel */
 
 
+
+#carrousel {
+    position: relative;
+    height: 700px;
+    width: 700px;
+    margin: auto;
+    margin-top: 80px;
+    
+}
+
+#carrousel ul li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+}
+
+#carrousel .next {
+    position: relative;
+    top: 250px;
+    left: 900px;
+    background-color: #add080;
+    font-size: 20px;
+    border-radius: 6px;
+}
+
+#carrousel .prev {
+    position: relative;
+    top: 250px;
+    left: 420px;
+    background-color: #add080;
+    font-size: 20px;
+    border-radius: 6px;
+}

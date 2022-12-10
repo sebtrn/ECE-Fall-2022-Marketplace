@@ -217,20 +217,19 @@ if(isset($_POST['ConfirmeCarte']) && isset($_SESSION['IdUtilisateur'])){
             </div>
         </div>
         <div class="col">
-            <h4>About</h4>
-            <a href="#">About</a>
+            <h4>A propos</h4>
+            <a href="about.php">About</a>
             <a href="#">Livraison & retours</a>
-            <a href="#">Conditions générales</a>
-            <a href="#">Confidentialité et cookies</a>
-            <a href="#">Contactez-nous</a>
+            <a href="about.php">Conditions générales</a>
+            <a href="about.php">Confidentialité et cookies</a>
+            <a href="about.php">Contactez-nous</a>
         </div>
         <div class="col">
             <h4>Mon compte</h4>
-            <a href="#">Se connecter</a>
-            <a href="#">Mon panier</a>
-            <a href="#">Ma wishlist</a>
-            <a href="#">Suivi de commande</a>
-            <a href="#">Assistance</a>
+            <a href="compte.php">Se connecter</a>
+            <a href="panier.php">Mon panier</a>
+            <a href="panier.php">Ma wishlist</a>
+            <a href="about.php">Assistance</a>
         </div>
         <div class="col install">
             <h4>Application mobile</h4>
