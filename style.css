@@ -926,8 +926,9 @@ form .btn:focus {
 /* Login Page */
 
 #Page-Login{
+    flex-direction: column;
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
 }
 
 #Page-Login .Login-Container {
@@ -969,6 +970,7 @@ form .btn:focus {
     
     justify-content: left;
     text-align: left;
+    
 }
 
 #Ajout-Container button:hover {
@@ -1203,3 +1205,44 @@ form .btn:focus {
     font-size: 20px;
     border-radius: 6px;
 }
+
+/* Notification */
+
+#form-recherche{
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+
+#listea-container{
+    margin-top: 50px;
+}
+
+#listeu-container{
+    margin-top: 50px;
+}   
+
+#form-recherche{
+    justify-content: space-evenly;
+}
+
+#form-recherche input {
+    width: 28%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+}
+
+#form-recherche select {
+    width: 28%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+}
+
+#form-recherche button:hover {
+    background: #088178;
+    color: #fff;
+}
+

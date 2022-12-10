@@ -61,6 +61,23 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
         ':IdUtilisateur' => intval($_GET["IdUtilisateur"])
     ));
 }
+
+// Delete Article
+
+if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] != 3) {
+    header('Location: compte.php');
+    $sql = 'DELETE FROM article WHERE IdArticle = :IdArticle';
+    $req = $db->prepare($sql);
+    $req->execute(array(
+        ':IdArticle' => intval($_GET["IdArticle"])
+    ));
+
+    $sql = 'DELETE FROM panier WHERE IdArticle = :IdArticle';
+    $req = $db->prepare($sql);
+    $req->execute(array(
+        ':IdArticle' => intval($_GET["IdArticle"])
+    ));
+}
 ?>
 
 <!DOCTYPE html>
@@ -245,13 +262,52 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
                 }
             }
             ?>
+            <!-- Liste Article (dynamique en fonction de l'admin ou du vendeur) -->
+            <?php if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] != 3) { ?>
+                <div id="listea-container">
+                    <h2>Liste articles</h2>
+                    <table>
+                        <thead>
+                            <td>IdArticle</td>
+                            <td>Nom</td>
+                            <td>Categorie</td>
+                            <td>Prix</td>
+                            <td>Quantite</td>
+                            <td>Proprietaire</td>
+                            <td></td>
+                        </thead>
+                        <?php
+                        if (isset($_SESSION['IdUtilisateur'])) {
+                            $sql = 'SELECT a.IdArticle, a.NomArticle, a.QuantiteMax, t.TypeArticle, a.Prix, u.Pseudo AS Proprietaire FROM article a LEFT JOIN typearticle t ON t.IdTypeArticle = a.IdTypeArticle LEFT JOIN utilisateur u ON u.IdUtilisateur = a.IdUtilisateur WHERE (CASE WHEN (SELECT u.IdTypeRole FROM utilisateur u WHERE u.IdUtilisateur = :IdUtilisateur) = 1 THEN (a.IdArticle != 0) ELSE (a.IdUtilisateur = :IdUtilisateur) END)';
+                            $req = $db->prepare($sql);
+                            $req->execute((array(
+                                ':IdUtilisateur' => $_SESSION['IdUtilisateur']
+                            )));
+                            $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($result as $row) {
+                        ?>
+                                <tr>
+                                    <td><?php echo $row['IdArticle']; ?></td>
+                                    <td><?php echo $row['NomArticle']; ?></td>
+                                    <td><?php echo $row['TypeArticle']; ?></td>
+                                    <td><?php echo $row['Prix']; ?></td>
+                                    <td><?php echo $row['QuantiteMax']; ?></td>
+                                    <td><?php echo $row['Proprietaire']; ?></td>
+                                    <td><a href="compte.php?IdArticle=<?php echo $row['IdArticle']; ?>"><i class="fa-solid fa-trash"></i></a></td>
+
+                                </tr>
+                        <?php }
+                        } ?>
+                    </table>
+                </div>
+            <?php } ?>
 
 
             <?php
             // Liste users
             if (isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] == 1) { ?>
-                <div>
-                    <h2>liste Utilisateurs</h2>
+                <div id="listeu-container">
+                    <h2>Liste utilisateurs</h2>
                     <table>
                         <thead>
                             <td>IdUtilisateur</td>

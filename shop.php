@@ -1,5 +1,5 @@
 <?php include 'conn.php';
-session_start();?>
+session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +24,8 @@ session_start();?>
                 <li><a href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
                 <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
-                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                    <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -36,50 +36,50 @@ session_start();?>
         <h4>La boutique</h4>
     </section>
     <section id="produit1" class="section-p1">
-    <div class="pro-container">
-    <?php
+        <div class="pro-container">
+            <?php
 
-// Lister tous les articles
-if(!isset($_GET['IdTypeArticle'])){
-   $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
-    $req = $db->prepare($sql);
-    $req->execute();
-    $result = $req->fetchAll(PDO::FETCH_ASSOC); 
-} else {
-    $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 AND a.IdTypeArticle = :IdTypeArticle ORDER BY a.DateCreation DESC';
-    $req = $db->prepare($sql);
-    $req->execute(array(
-        ':IdTypeArticle' => $_GET['IdTypeArticle']
-    ));
-    $result = $req->fetchAll(PDO::FETCH_ASSOC); 
-}
+            // Lister tous les articles
+            if (!isset($_GET['IdTypeArticle'])) {
+                $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
+                $req = $db->prepare($sql);
+                $req->execute();
+                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 AND a.IdTypeArticle = :IdTypeArticle ORDER BY a.DateCreation DESC';
+                $req = $db->prepare($sql);
+                $req->execute(array(
+                    ':IdTypeArticle' => $_GET['IdTypeArticle']
+                ));
+                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+            }
 
 
-foreach($result as $row)
-{
-    ?>
-    <div class="pro">
-        <img src="<?php echo $row['Img']; ?>" alt="">
-        <div class="description">
-            <span><?php echo $row['Marque']; ?></span>
-            <h5> <?php echo $row['NomArticle']; ?> </h5>
-            <div class="note">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <h4><?php echo $row['Prix']; ?>€ </h4>
+            foreach ($result as $row) {
+            ?>
+                <div class="pro">
+                    <img src="<?php echo $row['Img']; ?>" alt="">
+                    <div class="description">
+                        <span><?php echo $row['Marque']; ?></span>
+                        <h5> <?php echo $row['NomArticle']; ?> </h5>
+                        <div class="note">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4><?php echo $row['Prix']; ?>€ </h4>
+                    </div>
+                    <a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>">
+                        <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+                    </a>
+                </div>
+
+            <?php
+            }
+            ?>
         </div>
-        <a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>">
-            <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
-        </a>
-    </div>
-
-    <?php
-}
-?>
     </section>
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
@@ -93,7 +93,7 @@ foreach($result as $row)
     </section>
     <footer class="section-p1">
         <div class="col">
-            <img class="logo"src="logo_blanc.png" alt="">
+            <img class="logo" src="logo_blanc.png" alt="">
             <h4>Contact</h4>
             <p><strong>Adresse:</strong> Rue Sextius Michel, 75015 Paris</p>
             <p><strong>Téléphone:</strong>01 44 39 06 00</p>

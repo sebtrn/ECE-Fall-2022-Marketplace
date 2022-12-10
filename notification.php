@@ -1,5 +1,6 @@
 <?php include 'conn.php';
-session_start();?>
+session_start(); ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,18 +19,101 @@ session_start();?>
         <a href="#"><img src="img/logo.png" alt="" width="172px" height="70px"></a>
         <div>
             <ul id="navbar">
-                <li><a  href="index.php">Accueil</a></li>
+                <li><a href="index.php">Accueil</a></li>
                 <li><a href="shop.php">Boutique</a></li>
                 <li><a href="about.php">About</a></li>
                 <li><a class="active" href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
                 <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
-                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                    <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
                 <?php } ?>
             </ul>
         </div>
     </section>
+    <section id="form-recherche">
+        <form method="post">
+            <input type="number" name="min" min="1" placeholder="Prix Min">
+            <input type="number" name="max" min="1" placeholder="Prix Max">
+            <select name="IdTypeArticle">
+                <option value="">Selectionner un article</option>
+                <?php
+                $sql = 'SELECT * FROM typearticle';
+                $req = $db->prepare($sql);
+                $req->execute();
+                $result = $req->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($result as $row) {
+                ?>
+                    <option value="<?php echo $row['IdTypeArticle'] ?>"><?php echo $row['TypeArticle'] ?></option>
+                <?php } ?>
+            </select>
+            <button name="rechercheArticle" type="submit" class="normal">Rechercher</button>
+        </form>
+    </section>
+    <?php
+
+    if (isset($_POST['rechercheArticle'])) {
+        if($_POST['min'] != "" && $_POST['max'] != "" && $_POST['min'] > $_POST['max'] ){
+            echo '<script>alert("Parametre invalide")</script>';
+        }
+        $params = [];
+        if ($_POST['min'] != "") {
+            $reqMin = ' AND a.Prix >= ' . $_POST['min'];
+            array_push($params, $reqMin);
+        }
+        if ($_POST['max'] != "") {
+            $reqMax = ' AND a.Prix <= ' . $_POST['max'];
+            array_push($params, $reqMax);
+        }
+
+        if ($_POST['IdTypeArticle'] != "") {
+            $reqIdTypeArticle = ' AND a.IdTypeArticle = ' . $_POST['IdTypeArticle'];
+            array_push($params, $reqIdTypeArticle);
+        }
+
+        $sql = 'SELECT * from article a WHERE a.QuantiteMax > 0';
+        foreach ($params as $row) {
+            $sql .= $row;
+        }
+        $req = $db->prepare($sql);
+        $req->execute();
+
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+    ?>
+
+        <section id="produit1" class="section-p1">
+            <div class="pro-container">
+                <?php
+
+                foreach ($result as $row) {
+                ?>
+                    <div class="pro">
+                        <img src="<?php echo $row['Img']; ?>" alt="">
+                        <div class="description">
+                            <span><?php echo $row['Marque']; ?></span>
+                            <h5> <?php echo $row['NomArticle']; ?> </h5>
+                            <div class="note">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4><?php echo $row['Prix']; ?>€ </h4>
+                        </div>
+                        <a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>">
+                            <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+                        </a>
+                    </div>
+
+                <?php
+                }
+
+                ?>
+            </div>
+        </section>
+    <?php } ?>
     <section id="newsletter" class="section-p1 section-m1">
         <div class="newstext">
             <h4>S'inscrire à la newsletter</h4>
@@ -42,7 +126,7 @@ session_start();?>
     </section>
     <footer class="section-p1">
         <div class="col">
-            <img class="logo"src="logo_blanc.png" alt="">
+            <img class="logo" src="logo_blanc.png" alt="">
             <h4>Contact</h4>
             <p><strong>Adresse:</strong> Rue Sextius Michel, 75015 Paris</p>
             <p><strong>Téléphone:</strong>01 44 39 06 00</p>
