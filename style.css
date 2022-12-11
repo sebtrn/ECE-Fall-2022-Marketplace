@@ -148,15 +148,18 @@ body {
 }
 
 #hero button {
-    background-image: url("img/button.png");
     background-color: transparent;
-    color: #088178;
     border: 0;
     padding: 14px 80px 14px 65px;
     background-repeat: no-repeat;
     cursor: pointer;
     font-weight: 700;
     font-size: 15px;
+}
+
+#hero button:hover{
+    background: #088178;
+    color: #fff;
 }
 
 /* Avantages */
