@@ -207,6 +207,8 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
                         <br>
                         <input name="Prix" type="number" placeholder="Prix">
                         <br>
+                        <input name="DateExp" type="datetime-local" placeholder="DateExp">
+                        <br>
 
                         <select name="IdTypeArticle">
                             <?php
@@ -244,7 +246,7 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
 
             if (isset($_POST['addArticle'])) {
                 if ($_POST["NomArticle"] != '' && $_POST["Marque"] != '' && $_POST["Img"] != '' && $_POST["QuantiteMax"] != '' && $_POST["Prix"] != '' && $_POST["IdTypeArticle"] != '' && $_POST["IdTypeVente"] != '') {
-                    $sql = 'INSERT INTO article SET IdUtilisateur = :IdUtilisateur, NomArticle = :NomArticle, Marque = :Marque, Img = :Img, QuantiteMax = :QuantiteMax, Prix = :Prix, IdTypeArticle = :IdTypeArticle, IdTypeVente = :IdTypeVente, Description = :Description';
+                    $sql = 'INSERT INTO article SET IdUtilisateur = :IdUtilisateur, NomArticle = :NomArticle, Marque = :Marque, Img = :Img, QuantiteMax = :QuantiteMax, Prix = :Prix, IdTypeArticle = :IdTypeArticle, DateExpBestOffer=:DateExpBestOffer,IdTypeVente = :IdTypeVente, Description = :Description';
                     $req = $db->prepare($sql);
                     $req->execute(array(
                         ':IdUtilisateur' => ($_SESSION['IdUtilisateur']),
@@ -254,6 +256,7 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
                         ':QuantiteMax' => (intval($_POST["QuantiteMax"])),
                         ':Prix' => (floatval($_POST["Prix"])),
                         ':IdTypeArticle' => (intval($_POST["IdTypeArticle"])),
+                        ':DateExpBestOffer' => ($_POST["DateExp"]),
                         ':IdTypeVente' => (intval($_POST["IdTypeVente"])),
                         ':Description' => ($_POST["Description"])
                     ));

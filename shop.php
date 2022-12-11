@@ -41,12 +41,12 @@ session_start(); ?>
 
             // Lister tous les articles
             if (!isset($_GET['IdTypeArticle'])) {
-                $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
+                $sql = 'SELECT * FROM article a WHERE PrixNegociation IS NULL AND a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
                 $req = $db->prepare($sql);
                 $req->execute();
                 $result = $req->fetchAll(PDO::FETCH_ASSOC);
             } else {
-                $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 AND a.IdTypeArticle = :IdTypeArticle ORDER BY a.DateCreation DESC';
+                $sql = 'SELECT * FROM article a WHERE PrixNegociation IS NULL AND a.QuantiteMax > 0 AND a.IdTypeArticle = :IdTypeArticle ORDER BY a.DateCreation DESC';
                 $req = $db->prepare($sql);
                 $req->execute(array(
                     ':IdTypeArticle' => $_GET['IdTypeArticle']
