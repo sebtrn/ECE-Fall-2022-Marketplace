@@ -36,7 +36,7 @@ session_start(); ?>
         <h2>What you need is here</h2>
         <h1>OMNES Marketplace</h1>
         <br>
-        <a href="shop.php"><button>Shop Now</button></a>
+        <a href="shop.php"><button class="normal">Shop Now</button></a>
     </section>
     <section id="carrousel" class="section-p1">
         <ul>
