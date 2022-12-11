@@ -2,6 +2,7 @@
 include 'conn.php';
 session_start();
 checkWinner($db);
+//boolean, si l'utilisteur n'est pas connecté alors on le redirige vers la page de connexion et il ne peut pas ajouter dans le panier
 $bArticleAdded = false;
 $pPriceAdded = false;
 if (isset($_POST['addArticle'])) {
