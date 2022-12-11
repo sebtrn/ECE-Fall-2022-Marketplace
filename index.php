@@ -60,7 +60,7 @@ session_start(); ?>
             <?php
 
             // Lister tous les articles
-            $sql = 'SELECT * FROM article a WHERE PrixNegociation IS NULL AND a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
+            $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
             $req = $db->prepare($sql);
             $req->execute();
             $result = $req->fetchAll(PDO::FETCH_ASSOC);
