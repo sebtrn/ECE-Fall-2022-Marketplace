@@ -13,6 +13,7 @@ session_start(); ?>
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
+<!--Navbar-->
 
 <body>
     <section id="header">
@@ -38,6 +39,8 @@ session_start(); ?>
         <br>
         <a href="shop.php"><button class="normal">Shop Now</button></a>
     </section>
+
+    <!--Carrousel TP4-->
     <section id="carrousel" class="section-p1">
         <ul>
             <li><img src="img/products/n2.jpg" height="700px" width="700px" /></li>
@@ -53,7 +56,7 @@ session_start(); ?>
         <h2>Selection du jour</h2>
         <p>Collection Hiver - Printemps</p>
         <div class="pro-container">
-
+            <!--On liste les articles dont la quantite > 0 pour une boutique dynamique-->
             <?php
 
             // Lister tous les articles

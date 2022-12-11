@@ -1,7 +1,9 @@
 <?php
 include 'conn.php';
 session_start();
+//Booléen si l'utilisateur n'est pas connecté reste à false et ne peut pas ajouter d'article
 $bArticleAdded = false;
+//Lorsqu'on appuie sur le bouton addArticle, on ajoute au panier de l'utilisateur connecté sur la session, l'idarticle et sa quantite
 if (isset($_POST['addArticle'])) {
     if (isset($_SESSION['IdUtilisateur'])) {
         $sql = 'INSERT INTO panier SET IdArticle = :IdArticle, IdUtilisateur = :IdUtilisateur, Quantite = :Quantite';
@@ -18,6 +20,7 @@ if (isset($_POST['addArticle'])) {
 }
 
 // var_dump($_SESSION['IdUtilisateur']);
+//On liste les articles dont l'idarticle match celui ajouté
 $sql = 'SELECT * FROM article a WHERE a.IdArticle = :IdArticle';
 $req = $db->prepare($sql);
 $req->execute(array(
@@ -51,8 +54,8 @@ $result = $result[0];
                 <li><a href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
                 <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
-                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                    <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -78,7 +81,7 @@ $result = $result[0];
                 <button type="submit" name="addArticle" class="normal">Ajouter Au Panier</button>
                 <?php if ($bArticleAdded) {
                     echo "Article ajouté au panier";
-                }?>
+                } ?>
             </form>
             <h4>Description</h4>
             <span><?php echo $result['Description']; ?></span>
@@ -174,22 +177,7 @@ $result = $result[0];
             <p>©Projet Web dynamique 2022 - OMNES Marketplace Groupe 971</p>
         </div>
     </footer>
-    <script>
-        var MainImg = document.getElementById("MainImg");
-        var smallimg = document.getElementsByClassName("small-img");
-        smallimg[0].onclick = function() {
-            MainImg.src = smallimg[0].src;
-        }
-        smallimg[1].onclick = function() {
-            MainImg.src = smallimg[1].src;
-        }
-        smallimg[2].onclick = function() {
-            MainImg.src = smallimg[2].src;
-        }
-        smallimg[3].onclick = function() {
-            MainImg.src = smallimg[3].src;
-        }
-    </script>
+
     <script src="script.js"></script>
 </body>
 

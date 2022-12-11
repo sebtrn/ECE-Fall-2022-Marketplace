@@ -3,7 +3,7 @@ include 'conn.php';
 // header
 session_start();
 
-if(isset($_GET['IdPanier'])){
+if (isset($_GET['IdPanier'])) {
     header('Location: panier.php');
     $sql = 'DELETE FROM panier WHERE IdPanier = :IdPanier';
     $req = $db->prepare($sql);
@@ -36,8 +36,8 @@ if(isset($_GET['IdPanier'])){
                 <li><a href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
                 <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
-                <li><a class="active" href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                    <li><a class="active" href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -71,12 +71,12 @@ if(isset($_GET['IdPanier'])){
                 ));
                 $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
-                
 
-                foreach($result as $row) {
+                //On liste tous les articles du panier de l'IdPanier correspondant à l'IdUtilisateur
+                foreach ($result as $row) {
                 ?>
                     <tr>
-                        <td><a href="panier.php?IdPanier=<?php echo $row['IdPanier']?>"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
+                        <td><a href="panier.php?IdPanier=<?php echo $row['IdPanier'] ?>"><i class="fa-sharp fa-solid fa-trash"></i></a></td>
                         <td><a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>"><img src="<?php echo $row['Img']; ?>" alt=""></a></td>
                         <td><?php echo $row['NomArticle']; ?></td>
                         <td><?php echo $row['Prix']; ?>€</td>
@@ -96,16 +96,17 @@ if(isset($_GET['IdPanier'])){
                 <button class="normal">Appliquer</button>
             </div>
         </div>
+        <!--Prix * Quantite pour avoir le total-->
         <?php $sql = 'SELECT SUM(a.Prix*p.Quantite) AS PrixTotal FROM panier p LEFT join article a ON p.IdArticle = a.IdArticle WHERE p.IdUtilisateur = :IdUtilisateur';
-                $req = $db->prepare($sql);
-                $req->execute(array(
-                    ':IdUtilisateur' => intval($_SESSION["IdUtilisateur"]),
-                ));
-                $result = $req->fetchAll(PDO::FETCH_ASSOC);
-        
-                ?>
+        $req = $db->prepare($sql);
+        $req->execute(array(
+            ':IdUtilisateur' => intval($_SESSION["IdUtilisateur"]),
+        ));
+        $result = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
         <div id="subtotal">
-        
+
             <h3>Total</h3>
             <table>
                 <tr>
@@ -123,9 +124,9 @@ if(isset($_GET['IdPanier'])){
                 </tr>
             </table>
             <a href="paiement.php"><button class="normal">Paiement</button></a>
-            
+
         </div>
-        
+
     </section>
 
 

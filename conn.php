@@ -1,3 +1,5 @@
+<!--Connexion BDD-->
+
 <?php
 
 $host = 'localhost';

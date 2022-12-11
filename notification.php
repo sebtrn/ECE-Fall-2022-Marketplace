@@ -15,6 +15,7 @@ session_start(); ?>
 </head>
 
 <body>
+    <!--Navbar-->
     <section id="header">
         <a href="#"><img src="img/logo.png" alt="" width="172px" height="70px"></a>
         <div>
@@ -31,6 +32,7 @@ session_start(); ?>
             </ul>
         </div>
     </section>
+    <!--Recherche et affichage des articles en fonction des critères rentrés en input-->
     <section id="form-recherche">
         <form method="post">
             <input type="number" name="min" min="1" placeholder="Prix Min">
@@ -51,7 +53,7 @@ session_start(); ?>
         </form>
     </section>
     <?php
-
+//Quand on appuie sur le bouton rechercheArticle, on regarde que les inputs sont bien valides, on contatène les différents input pour former une seule requete SQL
     if (isset($_POST['rechercheArticle'])) {
         if($_POST['min'] != "" && $_POST['max'] != "" && $_POST['min'] > $_POST['max'] ){
             echo '<script>alert("Parametre invalide")</script>';

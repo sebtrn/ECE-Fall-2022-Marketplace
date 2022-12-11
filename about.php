@@ -1,5 +1,7 @@
+<!--Initialisation BDD et de la session-->
+
 <?php include 'conn.php';
-session_start();?>
+session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +16,7 @@ session_start();?>
 </head>
 
 <body>
+    <!--navbar-->
     <section id="header">
         <a href="#"><img src="img/logo.png" alt="" width="172px" height="70px"></a>
         <div>
@@ -24,8 +27,8 @@ session_start();?>
                 <li><a href="notification.php">Notification</a></li>
                 <li><a href="compte.php">Mon compte</a></li>
                 <?php if (isset($_SESSION['IdUtilisateur'])) { ?>
-                <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
-                <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
+                    <li><a href="panier.php"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                    <li><a href="disconnect.php"><i class="fa-solid fa-power-off"></i></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -74,11 +77,12 @@ session_start();?>
                 </li>
             </div>
         </div>
+        <!--Affichage de la carte-->
         <div class="map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10501.423391980861!2d2.2885965!3d48.8514244!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x167f5a60fb94aa76!2sECE.%20Ecole%20d&#39;ing%C3%A9nieurs.%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1669914246414!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
-
+    <!--Footer-->
     <footer class="section-p1">
         <div class="col">
             <img class="logo" src="logo_blanc.png" alt="">
