@@ -83,7 +83,7 @@ session_start(); ?>
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
 
     ?>
-
+<!--On liste les Articles de $result-->
         <section id="produit1" class="section-p1">
             <div class="pro-container">
                 <?php
@@ -126,6 +126,7 @@ session_start(); ?>
             <button class="normal">S'inscrire</button>
         </div>
     </section>
+    <!--footer-->
     <footer class="section-p1">
         <div class="col">
             <img class="logo" src="logo_blanc.png" alt="">

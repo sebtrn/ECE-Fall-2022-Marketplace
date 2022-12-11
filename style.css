@@ -640,8 +640,8 @@ footer .copyright {
     margin-bottom: 10px;
 }
 
-#prodetails .single-pro-details input[type='number'] {  
-    width: 50px;
+#prodetails .single-pro-details input[type='number'] {
+    width: 200px;
     height: 47px;
     padding-left: 10px;
     font-size: 16px;
