@@ -641,7 +641,7 @@ footer .copyright {
 }
 
 #prodetails .single-pro-details input[type='number'] {  
-    width: 50px;
+    width: 100px;
     height: 47px;
     padding-left: 10px;
     font-size: 16px;

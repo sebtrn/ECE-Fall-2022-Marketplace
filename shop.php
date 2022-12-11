@@ -1,5 +1,3 @@
-<!--Initialisation BDD-->
-
 <?php include 'conn.php';
 session_start(); ?>
 
@@ -43,12 +41,12 @@ session_start(); ?>
 
             // Lister tous les articles
             if (!isset($_GET['IdTypeArticle'])) {
-                $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
+                $sql = 'SELECT * FROM article a WHERE PrixNegociation IS NULL AND a.QuantiteMax > 0 ORDER BY a.DateCreation DESC';
                 $req = $db->prepare($sql);
                 $req->execute();
                 $result = $req->fetchAll(PDO::FETCH_ASSOC);
             } else {
-                $sql = 'SELECT * FROM article a WHERE a.QuantiteMax > 0 AND a.IdTypeArticle = :IdTypeArticle ORDER BY a.DateCreation DESC';
+                $sql = 'SELECT * FROM article a WHERE PrixNegociation IS NULL AND a.QuantiteMax > 0 AND a.IdTypeArticle = :IdTypeArticle ORDER BY a.DateCreation DESC';
                 $req = $db->prepare($sql);
                 $req->execute(array(
                     ':IdTypeArticle' => $_GET['IdTypeArticle']
@@ -73,7 +71,6 @@ session_start(); ?>
                         </div>
                         <h4><?php echo $row['Prix']; ?>€ </h4>
                     </div>
-                    <!--Lorsqu'on appuie sur le logo pour acheter, cela nous redirige vers la page produit en envoyant en paramètre l'IdArticle-->
                     <a href="produit.php?IdArticle=<?php echo $row['IdArticle']; ?>">
                         <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
                     </a>

@@ -1,9 +1,7 @@
-<!--Initialisation BDD et de la session-->
-
 <?php
 include 'conn.php';
 session_start();
-//Register: post les input dans la BDD, quand on appuie sur le bouton btn-register INSERT INTO VALUES
+//Register
 if (isset($_POST['btn-register'])) {
     if ($_POST["email"] != '' && $_POST["identifiant"] != '' && $_POST["password"] != '' && $_POST["Nom"] != '' && $_POST["Prenom"] != '' && $_POST["Adresse"] != '' && $_POST["Ville"] != '' && $_POST["Pays"] != '' && $_POST["CodePostal"] != '' && $_POST["Telephone"] != '' && $_POST["TypeRole"] != '') {
         $sql = 'INSERT INTO utilisateur SET Pseudo = :Pseudo, Email = :Email, Password = :Password, Prenom = :Prenom, Nom = :Nom, Adresse = :Adresse, Ville = :Ville, Pays = :Pays, CodePostal = :CodePostal, Telephone = :Telephone, IdTypeRole = :IdTypeRole';
@@ -31,7 +29,7 @@ if (isset($_POST['btn-register'])) {
         echo "<script>alert(\"Un champ est vide\")</script>";
     }
 }
-//Login, on liste les informations de l'utilisateur quand on appuie sur le bouton btn-login qui MATCH les informations entrées en INPUT
+//Login
 if (isset($_POST['btn-login'])) {
     if ($_POST["identifiant"] != '' && $_POST["password"] != '') {
         //commencer le query
@@ -54,7 +52,7 @@ if (isset($_POST['btn-login'])) {
 }
 
 
-// Delete User, qui match l'IdTypeUtilisateur si la session est Admin
+// Delete User 
 if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] == 1) {
     header('Location: compte.php');
     $sql = 'DELETE FROM utilisateur WHERE IdUtilisateur = :IdUtilisateur';
@@ -64,7 +62,8 @@ if (isset($_GET['IdUtilisateur']) && isset($_SESSION['IdUtilisateur']) && $_SESS
     ));
 }
 
-// Delete Article si la session est Admin ou Vendeur
+// Delete Article
+
 if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION['IdTypeRole'] != 3) {
     header('Location: compte.php');
     $sql = 'DELETE FROM article WHERE IdArticle = :IdArticle';
@@ -129,7 +128,7 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
                     <input type="text" name="Pays" placeholder="Pays">
                     <input type="number" name="CodePostal" placeholder="CodePostal">
                     <input type="number" name="Telephone" placeholder="Telephone">
-                    <!--On liste les Type de Role-->
+
                     <?php
                     $sql = 'SELECT * FROM TypeRole WHERE IdTypeRole != 1 ORDER BY IdTypeRole DESC';
                     $req = $db->prepare($sql);
@@ -153,7 +152,7 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
             </div>
         </section>
     <?php } ?>
-    <!-- front login-->
+    <!-- front login ici -->
     <?php
     if (isset($_SESSION['IdUtilisateur'])) {
         $sql = 'SELECT Pseudo, Email, Prenom, Nom, Photo, ImgFond AS Wallpaper, Adresse, Ville, Pays, CodePostal, Telephone, TypeRole AS Statut FROM utilisateur u LEFT JOIN typerole t ON t.IdTypeRole = u.IdTypeRole WHERE u.IdUtilisateur = :IdUtilisateur';
@@ -208,7 +207,9 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
                         <br>
                         <input name="Prix" type="number" placeholder="Prix">
                         <br>
-                        <!--On liste les Type d'Article'-->
+                        <input name="DateExp" type="datetime-local" placeholder="DateExp">
+                        <br>
+
                         <select name="IdTypeArticle">
                             <?php
                             $sql = 'SELECT * FROM typearticle';
@@ -221,7 +222,7 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
                             <?php } ?>
                         </select>
                         <br>
-                        <!--On liste les Type de Vente-->
+
                         <select name="IdTypeVente">
                             <?php
                             $sql = 'SELECT * FROM typevente';
@@ -245,7 +246,7 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
 
             if (isset($_POST['addArticle'])) {
                 if ($_POST["NomArticle"] != '' && $_POST["Marque"] != '' && $_POST["Img"] != '' && $_POST["QuantiteMax"] != '' && $_POST["Prix"] != '' && $_POST["IdTypeArticle"] != '' && $_POST["IdTypeVente"] != '') {
-                    $sql = 'INSERT INTO article SET IdUtilisateur = :IdUtilisateur, NomArticle = :NomArticle, Marque = :Marque, Img = :Img, QuantiteMax = :QuantiteMax, Prix = :Prix, IdTypeArticle = :IdTypeArticle, IdTypeVente = :IdTypeVente, Description = :Description';
+                    $sql = 'INSERT INTO article SET IdUtilisateur = :IdUtilisateur, NomArticle = :NomArticle, Marque = :Marque, Img = :Img, QuantiteMax = :QuantiteMax, Prix = :Prix, IdTypeArticle = :IdTypeArticle, DateExpBestOffer=:DateExpBestOffer,IdTypeVente = :IdTypeVente, Description = :Description';
                     $req = $db->prepare($sql);
                     $req->execute(array(
                         ':IdUtilisateur' => ($_SESSION['IdUtilisateur']),
@@ -255,6 +256,7 @@ if (isset($_GET['IdArticle']) && isset($_SESSION['IdUtilisateur']) && $_SESSION[
                         ':QuantiteMax' => (intval($_POST["QuantiteMax"])),
                         ':Prix' => (floatval($_POST["Prix"])),
                         ':IdTypeArticle' => (intval($_POST["IdTypeArticle"])),
+                        ':DateExpBestOffer' => ($_POST["DateExp"]),
                         ':IdTypeVente' => (intval($_POST["IdTypeVente"])),
                         ':Description' => ($_POST["Description"])
                     ));
