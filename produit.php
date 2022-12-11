@@ -5,6 +5,7 @@ checkWinner($db);
 //boolean, si l'utilisteur n'est pas connecté alors on le redirige vers la page de connexion et il ne peut pas ajouter dans le panier
 $bArticleAdded = false;
 $pPriceAdded = false;
+//Lorsque qu'on appuie sur ajouter un article, on INSERT INTO panier l'IdArticle reçu en paramètre depuis shop.php et sa quatité
 if (isset($_POST['addArticle'])) {
     if (isset($_SESSION['IdUtilisateur'])) {
         $sql = 'INSERT INTO panier SET IdArticle = :IdArticle, IdUtilisateur = :IdUtilisateur, Quantite = :Quantite';
