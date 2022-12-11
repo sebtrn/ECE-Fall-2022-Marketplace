@@ -1,10 +1,8 @@
-<!--Initialisation BDD-->
-
 <?php
 include 'conn.php';
 session_start();
 $bArticleAdded = false;
-//On regarde si les informations entrées en INPUT MATCH une carte dans la BDD, table wallet
+
 if(isset($_POST['ConfirmeCarte']) && isset($_SESSION['IdUtilisateur'])){
     if($_POST['NumeroCarte'] != '' && $_POST['Nom'] != '' && $_POST['CVV'] != '' && $_POST['month'] != '' && $_POST['year'] != ''){
         $sql = 'SELECT * FROM wallet w WHERE w.NumeroCarte = :NumeroCarte AND w.NomCarte = :Nom AND w.DateExp = :DateExp AND w.CodeSecu = :CVV';
